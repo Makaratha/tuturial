@@ -1,0 +1,2984 @@
+\documentclass[a4paper,12pt]{book}
+\usepackage{rotating}
+\usepackage[english]{babel}
+\usepackage[tikz]{mdframed}
+\usepackage{xcolor}
+\usepackage{tkz-tab}
+\usepackage{xpatch}
+\usepackage{enumitem}
+%..................usetikzlibrary......................................
+\usetikzlibrary{shapes.multipart}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.footprints}
+\usetikzlibrary{decorations.fractals}
+\usetikzlibrary{positioning,shapes.multipart,shapes.callouts}
+%%%%%%%%%%definecolor.....-------------*****
+\definecolor{activityBackgroundColor}{RGB}{254,254,206}
+\definecolor{activityBorderColor}{RGB}{168,0,54}
+\definecolor{noteBackgroundColor}{RGB}{251,251,119}
+\definecolor{noteBorderColor}{RGB}{168,0,54}
+\definecolor{tcbcolback}{RGB}{255,128,0} %ពណ៌
+%------------------ តម្រឹមក្រដាស់------------
+\usepackage[top=1.5cm,bottom=2.4cm,right=1.5cm,left=1.5cm]{geometry}
+%%%%%%%%%%%%%%%%%%ចុះបន្ទាត់
+\XeTeXlinebreaklocale ''km''
+\XeTeXlinebreakskip = 0pt plus 0.5pt minus 0.25pt
+%%%%%%%%%%%%%%%%%%%%%
+\everymath{\displaystyle}
+\renewcommand{\baselinestretch}{1.8}
+\usepackage{amsmath,amssymb}
+\usepackage{polynom,xlop}
+\usepackage{marvosym}
+\usepackage[export]{adjustbox}
+\usepackage[most]{tcolorbox} 
+\usepackage{tikz}% graphic drawing
+%---------------------------- ផ្លាស់ប្តូរលេខក្នុង enumerate ------
+\usepackage{enumitem}% change list environment like enumerate, itemize and description
+ \SetEnumitemKey{I}{label=\Roman*.}
+%%
+\SetEnumitemKey{1}{label=\color{red}\knum*., parsep=0pt,font=\kbk}
+%%
+\SetEnumitemKey{a}{label=\color{blue}\kalph*., parsep=0pt,font=\kbk}
+\SetEnumitemKey{A}{label=\color{blue}\en\Alph*,parsep=0pt}
+%អក្សរខ្មែរមានរង្វង់%%%%%%%%%%%%%
+\SetEnumitemKey{ac}{%
+	leftmargin=*,%
+	label={\protect\tikz[baseline=-0.9ex]\protect\node[draw=gray,thick,circle,minimum height=.5cm,inner sep=1pt,text=white,fill=orange]{\kb\kalph*};},%
+	font=\small\sffamily\bfseries,%
+	labelsep=1ex,%
+	topsep=0pt}
+%លេខ មានរង្វង់  {I,II,II,IV,V,...}
+\SetEnumitemKey{IC}{%
+	leftmargin=*,
+	label={\protect\tikz[baseline=-0.9ex]\protect\node[draw=gray,thick,circle,minimum height=.65cm,inner sep=1pt,text=white,fill=magenta]{\en\Roman*};},%
+	font=\small\sffamily\bfseries,%
+	labelsep=1ex,%
+	topsep=0pt}
+	%%លេខខ្មែរ មានរង្វង់(១,២,៣,៤,៥,៦,...)
+\SetEnumitemKey{1c}{leftmargin=*,%
+	label={\protect\tikz[baseline=-0.9ex]\protect\node[draw=gray,thick,circle,minimum height=.3cm,inner sep=1pt,text=black,fill=red]{\kb \knum*};},%
+	font=\small\sffamily\bfseries,%
+	labelsep=1ex,%
+	topsep=0pt}
+%%%លេខarabicមានរង្វង់
+	\SetEnumitemKey{kc}{leftmargin=*,%
+	label={\protect\tikz[baseline=-0.9ex]\protect\node[draw=gray,thick,circle,minimum height=.5cm,inner sep=1pt,text=white,fill=cyan]{\arabic*};},%
+	font=\small\sffamily\bfseries,%
+	labelsep=1ex,%
+	topsep=0pt}	
+%%%អក្សរអង់គ្លេស់តូចមានរង្វង់
+	\SetEnumitemKey{ae}{leftmargin=*,%
+	label={\protect\tikz[baseline=-0.9ex]\protect\node[draw=gray,thick,circle,minimum height=.5cm,inner sep=1pt,text=red,fill=green!50!]{\en\alph*};},%
+	font=\small\sffamily\bfseries,%
+	labelsep=1ex,%
+	topsep=0pt}	
+	%%%អក្សរអង់គ្លេស់ធំមានរង្វង់
+	\SetEnumitemKey{Ae}{leftmargin=*,%
+	label={\protect\tikz[baseline=-0.9ex]\protect\node[draw=blue,thick,circle,minimum height=.6cm,inner sep=1pt,text=blue,fill=white]{\en\Alph*};},%
+	font=\small\sffamily\bfseries,%
+	labelsep=1ex,%
+	topsep=0pt}	
+\usepackage{multicol}% multi columns
+%---------------------- ដាក់ font khmer--------
+\usepackage[no-math]{fontspec}
+\usetikzlibrary{shapes.callouts,shadows.blur,positioning,arrows}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\setmainfont [Scale = 0.84, Script=Khmer]{Khmer OS Battambang}
+\setmathrm{Times New Roman}
+\newcommand{\ko}{\fontspec[Scale = 0.84, Script=Khmer]{Khmer OS}\selectfont}
+\newcommand{\kml}{\fontspec[Scale = 0.84, Script=Khmer]{Khmer OS Muol Light}\selectfont}
+\newcommand{\kos}{\fontspec[Scale = 0.84, Script=Khmer]{Khmer OS System}\selectfont}
+\newcommand{\kbk}{\fontspec[Scale = 0.84, Script=Khmer]{Khmer OS Bokor}\selectfont}
+\newcommand{\kb}{\fontspec[Scale = 0.84, Script=Khmer]{Khmer OS Battambang}\selectfont}
+\newcommand{\kf}{\fontspec[Scale = 0.84, Script=Khmer]{Khmer OS Fasthand}\selectfont}
+\newcommand{\kom}{\fontspec[Scale = 0.84, Script=Khmer]{Khmer OS Muol Pali}\selectfont}
+\newcommand{\kr}{\fontspec[Scale=0.84,Script=Khmer]{Kh Rayuth HD 1}\selectfont}
+\newcommand{\ka}{\fontspec[Scale=0.84,Script=Khmer]{Khmer Arrow}\selectfont}
+ \newcommand{\kv}{\fontspec[Scale = 0.84, Script=Khmer]{Khmer Viravuth}\selectfont}
+\newcommand{\en}{\fontspec{Times New Roman}\selectfont}
+%%%%%--------------លេខខ្មែរ------------------
+\makeatletter
+\def\@khmernum#1{\expandafter\@@khmernum\number#1\@nil} 
+\def\@@khmernum#1{%
+\ifx#1\@nil 
+\else 
+\char\numexpr#1+"17E0\relax 
+\expandafter\@@khmernum\fi
+} 
+\def\knum#1{\expandafter\@khmernum\csname c@#1\endcsname}
+\def\khmernumeral#1{\@@khmernum#1\@nil}
+\AddEnumerateCounter{\knum}{\@knum}{}
+\makeatother
+%----------------------អក្សរខ្មែរ---------
+\makeatletter
+\newcommand*{\kalph}[1]{%
+\expandafter\@kalph\csname c@#1\endcsname%
+}
+\newcommand*{\@kalph}[1]{%
+\ifcase#1\or ក\or ខ\or គ\or ឃ\or ង\or ច\or ឆ\or ជ\or ឈ\or ញ\or  ដ\or ឋ\or ឌ%
+\or ឍ\or ណ\or ត\or ថ\or ទ\or ធ\or ន\or ប\or ផ\or ព\or ភ\or ម\or យ\or រ\or ល%
+\or វ\or ស\or ហ\or ឡ\or អ%
+\else\@ctrerr\fi%
+}
+\AddEnumerateCounter{\kalph}{\@kalph}{}
+\makeatother
+%----------------------------------------
+\usepackage{fancyhdr}
+\newcommand*\olive[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,fill=white,draw,inner sep=3pt] (char) {#1};}}
+% header style
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\begin{tikzpicture}
+	\draw [black,line width=0.7mm](0,0)--(3,0);
+\end{tikzpicture}
+\kml ​ថា​ មករា}
+\fancyhead[L]{\includegraphics[scale=0.3]{vogeltje.png}  }
+\fancyfoot[LE,RO]{\color{blue}\olive{\color{blue}\thepage}}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[LE,RO]{\color{blue}\olive{\color{blue}\thepage}}
+  \renewcommand{\headrulewidth}{0pt}
+}
+\fancyfoot[RE,LO]{}
+\renewcommand{\thepage}{\kml \knum{page}}
+%%%%%%
+\futurelet\TMPheadrule\def\headrule{{\color{white}\TMPheadrule}}
+\headheight = 20pt
+\headsep = 5pt
+\footskip = 25pt
+%%%%%renewcommand
+\renewcommand{\thechapter}{\kml \knum{chapter}}
+\renewcommand{\thesection}{\kml \knum{section}} 
+\renewcommand{\thesubsection}{\thesection.\knum{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\knum{subsubsection}}
+\renewcommand{\thepart}{\kml \knum{part}}
+%%%%%%%%newcommand
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\I}{\overrightarrow{i}}
+\newcommand{\J}{\overrightarrow{j}}
+\newcommand{\K}{\overrightarrow{k}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\so}{{\color{magenta}{\kv ដូចនេះ}}\quad}
+\newcommand{\answer}{\tcbox[enhanced,size=fbox,colback=gray!31,colframe=gray!1,drop lifted shadow]}
+\newcommand{\solution}{{\color{magenta}{\underline{\kv ដំណោះស្រាយ}}}}
+%%%%%%%%%%%%ប្រអប់លំហាត់
+\tcbset{theostyle/.style={
+    enhanced,
+    rounded corners,lifted shadow={1mm}{-2mm}{3mm}{0.1mm}%
+{black!50!white},
+    attach boxed title to top left={
+      xshift=-1mm,
+      yshift=-4mm,
+      yshifttext=-1mm
+    },
+    top=1.5ex,
+    colback=red!10!white,
+    colframe=white,
+    fonttitle=\bfseries,
+    boxed title style={
+      rounded corners,
+    size=small,
+    colback=red,
+    colframe=white,
+    lifted shadow={1mm}{-2mm}{3mm}{0.1mm}%
+{black!50!white}
+  } 
+}}
+\newtcbtheorem{Theorem}{\kv ទ្រឹស្តីបទទី}{%
+  theostyle
+}{theo}
+\newenvironment{theorem}{\Theorem{}{}}{\endTheorem}
+%%%%%%\proof
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\tcolorboxenvironment{proof}{% 'proof' from 'amsthm'
+    blanker,breakable,left=5mm,
+    before skip=10pt,after skip=10pt,
+    borderline west={1mm}{0pt}{magenta}
+}
+%------------solution box
+\newtcolorbox{solutionbox}{
+        colframe=cyan!20!white,
+        colback =cyan!20!white,
+        top=0mm, bottom=0mm, left=0mm, right=0mm,
+        arc=0mm,
+%
+        fontupper=\color{blue!70!black},
+        fonttitle=\bfseries\color{blue!70!black},
+        title=គន្លឹះដោះស្រាយ:
+                        }
+ %******--------marker note
+\newtcolorbox{marker}[1][]{enhanced,
+  before skip=2mm,after skip=3mm,fontupper=\kbk,
+  boxrule=0.4pt,left=5mm,right=2mm,top=1mm,bottom=1mm,
+  colback=yellow!50,
+  colframe=yellow!20!black,
+  sharp corners,rounded corners=southeast,arc is angular,arc=3mm,
+  underlay={%
+    \path[fill=tcbcolback!80!black] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+    \path[draw=tcbcolframe,shorten <=-0.05mm,shorten >=-0.05mm] ([yshift=3mm]interior.south east)--++(-0.4,-0.1)--++(0.1,-0.2);
+    \path[fill=yellow!50!black,draw=none] (interior.south west) rectangle node[white]{\Huge\bfseries !} ([xshift=4mm]interior.north west);
+    },
+  drop fuzzy shadow,#1}
+\makeatother
+%%%%%%%%%%%%%mybox0%%%%%%%%%%%%%%%
+\newtcolorbox{mybox0}[2][]{enhanced,skin=enhancedlast jigsaw,attach boxed title to top left ={xshift=0mm, yshift=-3mm},fonttitle=\bfseries\sffamily,varwidth  boxed title=0.5\linewidth, colframe=teal,
+	interior style={top color=teal!25!white,bottom color=violet!15!white},boxed title style={empty,arc=1pt,outer arc=1pt,boxrule=1pt},underlay boxed title={
+		\fill[magenta!80!black] (title.north west) -- (title.north east)--(title.south east) -- (title.south west) -- cycle;
+		\fill[red!40!orange] ([yshift=0.5mm]frame.north east)-- +(0,0) -- +(0,0.32) --+(-14.89,0.32)--+(-14.89,0) --cycle; },title={#2},#1}
+	%%%%%%%%%%%%%%%%%
+	\newtcolorbox{mybox}[2][]{enhanced,
+	colback=blue!1,
+	attach boxed title to top left={yshift*=1mm},
+	varwidth boxed title*=-3cm,boxrule=1pt,breakable,colframe=red!50,drop lifted shadow,colback=blue!3}	
+\tcolorboxenvironment{exercise}{
+ 	enhanced,
+ 	breakable,
+ 	arc=0pt,
+ 	outer arc=0pt,
+ 	rightrule=2pt,
+ 	toprule=2pt,
+ 	bottomrule=2pt,
+ 	leftrule=2pt,
+ 	colframe=red,
+ 	colback=pink!15 ,
+ 	attach boxed title to top left,drop lifted shadow,
+ 	boxed title style={colback=blue,arc=0pt,outer arc=0pt,colupper=white}
+ }
+ \newtcolorbox{Box2}[2][]{
+                lower separated=false,
+                colback=red!10,lifted shadow={1mm}{-2mm}{3mm}{0.1mm}%
+{black!50!white},
+colframe=white,fonttitle=\bfseries,
+colbacktitle=red,
+coltitle=white,
+enhanced,
+attach boxed title to top left={xshift=0em,yshift=-\tcboxedtitleheight/2,}, top=1.5ex,arc=0pt
+boxed title style={boxrule=0pt,colframe=white,lifted shadow={1mm}{-2mm}{3mm}{0.1mm}%
+{black!50},},
+title=#2,#1}
+ %%------------------newtheorem-------------------------
+\newtheorem{exercise}{\kml លំហាត់ទី}
+%%%--------------------
+\renewcommand{\theexercise}{\kml \knum{exercise}}
+%\renewcommand{\theex}{\knum{ex}}
+\newtcbtheorem{ex}{ទ្រឹស្តីបទ}{
+  enhanced,
+  sharp corners,
+  attach boxed title to top left={
+    yshifttext=-1mm
+  },
+  colback=white,
+  colframe=blue!75!black,
+  fonttitle=\bfseries,
+  boxed title style={
+    sharp corners,
+    size=small,
+    colback=blue!75!black,
+    colframe=blue!75!black,
+  } 
+}{thm}
+\begin{document}
+\renewcommand{\partname}{ផ្នែកទី} 
+\renewcommand{\contentsname}{\color{cyan}{\kml មាតិកា}} 
+%\tableofcontents
+\def\chaptername{\kml ជំពូក}
+	\begin{tikzpicture}[overlay,remember picture]
+	\node at (10,0) {\includegraphics[width=37cm]{Bart-Simpson-Wallpaper1}};
+	\draw [blue,fill=white!20,fill opacity = 0.5,thick,rounded corners=5ex] (30,-1) rectangle (5,1);
+	\draw [blue,thick,rounded corners=5ex] (30,-1.2) rectangle (5,1.2);
+	\draw [blue,thick,rounded corners=5ex] (30,-1.3) rectangle (5,1.3);
+	\node[blue] at (10.05,0) {\fontsize{40}{100}\selectfont\kml ផ្នែកលំហាត់};
+	\node[blue] at (10,0) {\fontsize{40}{100}\selectfont\kml ផ្នែកលំហាត់};
+    \end{tikzpicture}
+	\vspace*{2cm}
+\begin{enumerate}[1]
+\item  ស្រាយបញ្ជា់ថាផលបូកគូបនៃបីចំនួនគត់តគ្នាចែកដាច់នឹង​​$9$។
+\item ស្រាយថាចំពោះគ្រប់$n$ជាចំនួនគត់
+\begin{enumerate}[a]
+\item $3n^4-14n^3+21n^2-10n \vdots 24$
+\item $n^5-5n^3+4n \vdots 120$​ ។
+\end{enumerate}
+\item ចំពោះ$n$គូស្រាយបញ្ជាក់ថា$20^n+16^n-3n-1$ចែកដាច់នឹង$323$។
+\item ស្រាយបញ្ជាក់ថាចំពោះគ្រប់$n$ជាចំនួនគត់ធម្មជាតិៈ
+\begin{enumerate}[a]
+\item $11^{n+2}+12^{2n+1} \vdots 133$
+\item $5^{n+2}+26\times 5^n+8^{2n+1} \vdots 59$
+\item $7\times5^{2n}+12\times6^n \vdots 19$។
+\end{enumerate}
+\item ស្រាយបញ្ជាក់ថា
+\begin{enumerate}[a]
+\item ${2222}^{5555}+{5555}^{2222} \vdots 7$
+\item $4^{2n}-3^{2n}-7 \vdots 168,\forall n \in {\N}$
+\item $2^{2^{2n}}+5 \vdots 7 ,\forall n \in {\N},n>1$
+\end{enumerate}
+\item គេឱ្យ $f(x)$ ជាពហុធាមានមេគុណជាចំនួ​នគត់ $f(x)=a_{n}x^{n}+a_{n-1}x^{n-1}+\cdots+a_{1}x+a_{o}$ ដែល ​$a_{i}\in{\Z}$\\ $i=0,1,2,\cdots,n$និង$a,b$ ជាពីរចំនួនគត់ផ្សេងគ្នា។​ ស្រាយថា$f(a)-f(b) \vdots a-b$\\ អនុវត្តៈ គ្មានពហុធា$P(x)$ណាមានមេគុណជាចំនួនគត់​អាចមានតម្លៃ$P(7)=5$និង$P(15)=9$។
+\item ស្រាយបញ្ជាក់ថាបើ$n$មិនចែកដាច់$3$នោះ$3^{2n}+3^n+1 \vdots 13$ ។
+\item រកគ្រប់ចំនួនគត់ធម្មជាតិ$n$ដើម្បីឱ្យ$2^n-1 \vdots 7$។ ស្រាយថាចំពោះ$\forall n \in{\N}$នោះ$2^n+1\not \vdots$  $7$។
+\item ដោយប្រើវិចារអនុមានរួម​ស្រាយបញ្ជាក់ថាចំពោះគ្រប់$n$
+\begin{enumerate}[a]
+\item $16^n-15n-1 \vdots 225$
+\item $3^{3n+3}-26n-27 \vdots 169$។
+\end{enumerate}
+\item ដោយប្រើវិចារអនុមានរួមស្រាយថាគ្រប់$n\in{\N}$
+\begin{enumerate}[a]
+\item $2^{2^{6n+2}}+3\vdots 19$
+\item $2^{2^{2n+1}}+3 \vdots 7$  ។
+\end{enumerate}
+\item ដោយប្រើវិចារអនុមានរួមស្រាយបញ្ជាក់ថាចំពោះ$n\in{\N}$និង$k\in{\N}$,kសេសេ  គេបាន$k^{2^{n}}-1\vdots 2^{n+2}$។
+\item ដោយប្រើវិចារអនុមានរួមស្រាយបញ្ជាក់ថា$\forall n \in n$
+\begin{enumerate}[a]
+\item $11^{n+2}+12^{2n+1}\vdots 133$
+\item $6^{2n+1}+5^{n+2}\vdots 31$
+\end{enumerate}
+\item ស្រាយបញ្ជាក់ថា$x+\frac{1}{2}\in{\Z}$នោះ$x^n+\frac{1}{x^n}\in{\Z}$ចំពោះ$x\in{\N}$។. 
+\item ស្រាយបញ្ជាក់ថា$1^{2002}+2^{2002}+3^{2002}+\cdots+2002^{2002} \vdots 11$
+\item ស្រាយបញ្ជាក់ថា$3^{2^{4n+1}}+2^{3^{4n+1}}+5 \vdots 22$ចំពោះ$\forall n \in {\N}$។
+\item ស្រាយបញ្ជាក់ថា$\forall n \in{\N}$
+\begin{enumerate}[a]
+\item $2^{2^{6n+2}}+3 \vdots 19$
+\item $2^{2^{2n+1}}+3 \vdots 7$
+\item $2^{2^{4n+1}}+7 \vdots 11$ ។
+\end{enumerate}
+\item ស្រាយញ្ជាក់ថា$a_1+a_2+...+a_{2018} \vdots 30$នោះ
+${a_1}^5+{a_2}^5+...+a_{2018}^5 \vdots 30$ចំពោះ${a_i}\in{\N} ,i=1,2,...,2018$។
+\item ស្រាយបញ្ជាក់ថា$2^{70}+3^{70} \vdots 13$។
+\item $p$ជាចំនួនបឋមធំជាង$7$។ ស្រាយថា$3^p-2^p-2 \vdots 42p$។
+\item រកសំណល់នៃវិធីចែក$2008^{2018}$នឹង$13$។
+\item រកសំណល់នៃវិធីចែក${3^{{2^{2018}}}}$នឹង$11$ដោយ$gcd(3,11)=1$។
+\item រកសំណល់នៃវិធីចែក$4362^{4362}$ ចែកនឹង$11$។
+\item រកចំនួនគត់មានលេខពីរខ្ទង់ដែលពេលចែកនឹង$5$មានសំណល់$2$ចែកនឹង$9$មានសំណល់$7$។
+\item រកសំណល់នៃវិធីចែក$2^{2017}$នឹង$35$។
+\item រកសំណល់នៃវិធីចែក$3^{2^{4n+1}}$ចែកនឹង$65$។
+\item រកសំណល់នៃវិធីចែក
+\begin{enumerate}[a]
+\item $3^{100}$នឹង$25$
+\item $2^{2007}$នឹង$49$។
+\end{enumerate}
+\item រកសំណល់នៃវិធីចែក
+\begin{enumerate}[a]
+\item $3^{4^{15}}$នឹង$121$
+\item $15^{15^{15}}$នឹង$49$។
+\end{enumerate}
+\item រកសំណលក្នុងវិធីចែក
+\begin{enumerate}[a]
+\begin{multicols}{2}
+\item $6^{1991}$នឹង$28$
+\item $35^{150}$នឹង$425$
+\item $35^{12^{11}}$នឹង$325$
+\item $22^{2002}$នឹង$1001$។
+\end{multicols} 
+\end{enumerate}
+\item រកសំណល់នៃ$3^{2019}$ចែកនឹង$35$។
+\item រកសំណល់នៃ$3^{2018}$ចែកនឹង$49$។
+\item ដោយប្រើទ្រឹស្តីបទ$Euler$រកសំណល់នៃវិធីចែក$3^{2019}$នឹង$28$។
+\item ដោយប្រើទ្រឹស្តីបទ{\en Euler}រកសំណល់ក្នុងវិធីចែក
+\begin{enumerate}[a]
+\item $109^{345}$នឹង$14$
+\item $5^{70}+7^{50}$ចែកនឹង$12$។
+\end{enumerate}
+\item ដោយប្រើទ្រឹស្តីបទ{\en Euler}រកសំណល់នៃវិធីចែក
+\begin{enumerate}[a]
+\item $2008^{2008}$នឹង$35$
+\item $11^{11^{11}}$នឹង$30$។
+\end{enumerate}
+%\newpage
+\item ដោយប្រើ{\en Euler}រកសំណល់នៃវិធីចែក
+\begin{enumerate}[a]
+\item $3\times 5^{70}+4\times 7^{100}$នឹង$132$
+\item $5^{70}+7^{50}$នឹង$12$។
+\end{enumerate}
+\item ស្រាយថា$0.3(2003^{2017}-2007^{2019})$ជាចំនួនគត់។
+\item ស្រាយបញ្ជាក់ថា$2^{3^{4n+1}}+3 \vdots 11, \forall n \in{\N}$។
+\item ស្រាយបញ្ជាក់ថា$9^{9^{9^{9^{9}}}}-9^{9^{9^{9}}} \vdots 10$។
+\item រកលេខមួយខ្ទង់ចុងក្រោយនៃ$3^{2^{1998}}-2^{9^{1998}}$។
+\item រកលេខមួយខ្ទងចុងក្រោយនៃផលចែកក្នុងវិធីចែក$3^{2^{1930}}+2^{9^{1945}}-19^{5^{1980}}$នឹង$7$។
+\item រកលេខមួយខ្ទង់ចុងក្រោយនៃចំនួន$A=2017^{2018^{2019}}$។
+\item រកលេខពីរខ្ទង់ចុងក្រោយនៃ$14^{14^{14}}$។
+\item រកលេខពីរខ្ទង់ចុងក្រោយនៃ$2^{9^{1997}}$។
+\item ស្រាយបញ្ជាក់ថា$9^{9^{9^{9}}}-9^{9^{9}}\vdots 100$។
+\item រកលេខពីរខ្ទង់ចុងក្រោយនៃ$3^{2^{2008}}$។
+\item ស្រាយបញ្ជាក់ថា$7^{2^{4n+1}}+4^{3^{4n+1}}-65$ចែកដាច់នឹង$100$។
+\item រកលេខបីខ្ទង់ចុងក្រោយនៃ
+\begin{enumerate}[a]
+\begin{multicols}{2}
+\item $2^{2008}$
+\item $3^{2018}$។
+\end{multicols}
+\end{enumerate}
+\item រកលេខបីខ្ទង់ចុងក្រោយនៃ
+\begin{enumerate}[a]
+\begin{multicols}{2}
+\item $2^{9^{2001}}$
+\item $14^{14^{14}}$
+\item $3^{2^{2007}}$
+\item $17^{5^{123}}$។
+\end{multicols}
+\end{enumerate}
+\item រកពីរចំនួនគត់វិជ្ជមាន$a$និង$b$
+\begin{multicols}{2}
+\begin{enumerate}[a]
+\item ដោយស្គាល់$\begin{cases}
+	a+b=72\\gcd(a,b)=12
+\end{cases}$
+\item ដោយស្គាល់ $\begin{cases}
+ab=735\\lcm(a,b)=105
+\end{cases}$
+\end{enumerate}
+\end{multicols}
+\item រក$n\in{\N}, n<100$ដែល$gcd(n,252)=7$។
+\item ដោយដឹងថា$gcd(a,b)=1$រក$gcd(11a+2b,18a+5b)$។
+\item រកចំនួនគត់ធម្មជាតិ$a$និង$b$ដោយដឹងថា
+\begin{enumerate}[a]
+\item $a+b=432,gcd(a,b)=36$
+\item $a\times b=216,gcd(a,b)=6$
+\item $ab=288,gcd(a,b)=6$។
+\end{enumerate}
+\item គេឱ្យប្រភាគសម្រួលមិនបាន$\dfrac{a}{b}$។ ស្រាយថាប្រភាគខាងក្រោមក៏សម្រួលមិនបានដែរ
+\begin{multicols}{3}
+\begin{enumerate}[a]
+\item $\dfrac{a-b}{ab}$
+\item $\dfrac{ab}{a^{2}+b^{2}}$
+\item $\dfrac{2a+b}{a(a+b)}$ ។
+\end{enumerate}
+\end{multicols}
+\item ស្រាយបញ្ជាក់ថាប្រភាគខាងក្រោមសម្រួលមិនបានចំពោះគ្រប់ចំនួនគត់$n$
+\begin{multicols}{3}
+\begin{enumerate}[a]
+\item $\dfrac{12n+1}{30n+2}$
+\item $\dfrac{15n^{2}+8n+6}{30n^{2}+21n+13}$
+\item $\dfrac{n^{3}+2n}{n^{4}+3n^{2}+1}$ ។
+\end{enumerate}
+\end{multicols}
+\item ស្រាយបញ្ជាក់ថាចំពោះ$a>1$និង$m>1$គេបាន$gcd\left(\dfrac{a^{m}-1}{a-1},a-1\right)=gcd(m,a-1)$ដែល $a,m\in{\N}$។
+\item រកចំនួនគត់ធម្មជាតិ$n$តូចបំផុតដើម្បីឱ្យប្រភាគខាងក្រោមសម្រួលមិនបាន$\dfrac{7}{n+9}, \dfrac{8}{n+10}, \dfrac{9}{n+11},\cdots,\dfrac{31}{n+33}$​ ។
+\item រកចំនួនគត់ធម្មជាត$n$ដើម្បី​ឱ្យ$\dfrac{6n+5}{5n+6}$សម្រួលមិនបាន។
+\item រកគ្រប់ចំនួនគត់$n\in {\N}$ដើម្បីឱ្យ
+\begin{enumerate}[a]
+\item $n^{4}+4$ជាចំនួនបឋម
+\item $n^{1997}+n^{1996}+1$ជាចំនួនបឋម
+\item $n^{4}+n^{2}+1$ជាចំនួនបឋម។
+\end{enumerate}
+\item រកចំនួនបឋម$p$ដែល
+\begin{enumerate}[a]
+\item $2p+1$ជាគូបនៃចំនួគត់ធម្មជាតិ
+\item $13p+1$ជាគូបនៃចំនួនគត់ធម្មជាតិ។
+\end{enumerate}
+\item ស្រាយបញ្ជាក់ថា$2^{2{10n+1}}+19$និង$2^{3^{4n+1}}+3^{2^{4n+1}}+5$ជាចំនួនសមាសចំពោះ$\forall n \in {\N}$។
+\item រកគ្រប់ចំនួនគត់វិជ្ជមាន$a$និង$b$ដើម្បីឱ្យ$a^{4}+4b^{4}$ជាចំនួនបឋម។
+\item $p$ជាចំនួនបឋមធំជាង$5$ស្រាយបញ្ជាក់ថា$p^{8n}+3p^{4n}-4 \vdots 5$។
+\item រកចំនួនបឋម$p$ដើម្បីឱ្យ$2^{p}+p^{2}$ក៏ជាចំនួនបឋមដែរ។
+\item រកគ្រប់ឬសគត់វិជ្ជមាន $x,y$ ដែលផ្ទៀងផ្ទាត់សមីការៈ
+\begin{enumerate}[a]
+\begin{multicols}{2}
+\item $5x+7y=112$
+\item $5x+19y=674$
+\item $38x+117y=15$
+\item $21x-17y=-3$
+\end{multicols}
+\end{enumerate}
+\item 
+\begin{enumerate}[a]
+\item នៅលើបន្ទាត់​ $8x-13y+6=0$ ចូររកចំណុចគត់(ជាចំណុចមានកូអរដោនេជាចំនួនគត់)នៅចន្លោះបន្ទាត់ពីរ\\ $x=-10$​ និង $x=5$។
+\item ស្រាយបញ្ជាក់ថាក្នុងចតុកោណកែងកំណត់ដោយបន្ទាត់ $x=6, x=42$ និង $y=2, y=17$ មិនមានចំណុចគត់ណានៅលើបន្ទាត់ $3x+5y=7$។
+\end{enumerate}
+\item 
+\begin{enumerate}[a]
+\item រកឬសគត់នៃសមីការ $x+y=xy$ ។
+\item​ រកពីរចំនួនគត់ធម្មជាតិដែលផលដកការេរបស់វាស្មើនឹង $169$។
+\end{enumerate}
+\item
+\begin{enumerate}[a]
+\item រកគ្រប់បណ្តាត្រីកោណកែងដែលមានជ្រុងជាចំនួនគត់ហើយមានផ្ទៃក្រឡាស្មើបរិមាត្រ។
+\item រកឬសជាចំនួនគត់ធម្មជាតិនៃ $3x^3-xy=5$។
+\end{enumerate}
+\item រកគ្រប់ឬសគត់វិជ្ជមាននៃសមីការ $x+y+z=xyz$។
+\item ត្រីកោណមួយមានកម្ពស់ជាចំនួនគត់និងកាំរង្វង់ចារឹកក្នុងត្រីកោណនេះស្មើ $1$​ ។ ស្រាយបញ្ជាក់ថាត្រីកោណនេះជាត្រីកោណសម័ង្ស។
+\item រកគ្រប់ចំនួនគត់មានលេខបីខ្ទង់ដែលផលបូកចម្រាស់នៃខ្ទង់របស់វាស្មើនឹង​$1$។
+\item រកឬសគត់វិជ្ជមាននៃប្រព័ន្ធសមីការខាងក្រោម៖
+\begin{enumerate}[a]
+\begin{multicols}{2}
+\item $\begin{cases}x-y+z=2\\2x^2-xy+x-2z=1\end{cases}$
+\item $\begin{cases}
+	3x+y+z=14\\5x+3y+z=28
+\end{cases}$
+\end{multicols}
+\end{enumerate}
+\item រកឬសគត់នៃប្រព័ន្ធសមីការខាងក្រោម៖
+\begin{multicols}{2}
+\begin{enumerate}[a]
+\item $\begin{cases}x^2-y^2-z^2=1\\-x+y+z=3\end{cases}$
+\item $\begin{cases}x+y+z=3\\(z+y)(y-3)(z-3)=8\end{cases}$
+\end{enumerate}
+\end{multicols}
+\item 
+\begin{enumerate}[a]
+\item រកឬសគត់វិជ្ជមាននៃសមីការ $\frac{xy}{z}+\frac{yz}{x}+\frac{xz}{y}=3$
+\item រកឬសគត់វិជ្ជមាននៃសមីការ​ $\left(x+y+1\right)^2=3\left(x^2+y^2+1\right)$​។
+\end{enumerate}
+\item 
+\begin{enumerate}[a]
+\item រកឬសគត់នៃសមីការ $x^2-2y^2=5$
+\item ដោះស្រាយសមីការក្នុងសំណុំចំនួនគត់ $x_1^4+x_2^4+\cdots+x_7^4=2008$
+\end{enumerate}
+\item រកឬសគត់វិជ្ជមាននៃសមីការ $\left(2x+5y+1\right)\left(2^{\vert x \vert}+y+x^2+x\right)=105$។
+\item រកឬសគត់វិជ្ជមាននៃសមីការ $2\left(x+y\right)+16=3xy$​។
+\item រកចំនួនជាការេប្រាកដដែលមានរាង​ $\overline{22ab}$ ។
+\item រក $a\in {\N}$ ដើម្បីឱ្យចំនួនខាងក្រោមជាការេប្រាកដៈ
+\begin{enumerate}[a]
+\item $a^2+a+1589$
+\item $a^2+81$ ។
+\end{enumerate}
+\item 
+\begin{enumerate}[a]
+\item រកចំនួនគត់ $n\in {\N}$ ដែល $n+24$ និង​ $n-65$ ជាពីរចំនួនការេប្រាកដ។
+\item​ រក $n\in {\Z}$ ដែល $n^2+2007$​ ជាការេប្រាកដ។
+\end{enumerate}
+\item រកចំនួនមួយជាការេប្រាកដមានលេខបួនខ្ទង់ដែលខ្ទង់ចុងក្រោយជាចំនួនបឋម​ ហើយឬសការេនៃចំណុចនោះមានផលបូកជាការេប្រាកដ។
+\item រកចំនួនគត់ធម្មជាតិដែលៈ
+\begin{enumerate}[a]
+\item បើថែម $64$ឬបន្ថយ$35$គេសុទ្ធតែបានចំនួនជាការេប្រាកដ។
+\item បើគេថែម$51$ឬបន្ថយ$38$គេនៅតែបានចំនួនជាការេប្រាកដ។
+\end{enumerate}
+\item រកចំនួនជាការេប្រាកដមានលេខបួនខ្ទង់ដោយដឹងថាពីរខ្ទង់ដំបូងធំជាងលេខខ្ទង់ចុងក្រោយចំនួនមួយឯកតា។
+\item​ រកមួយចំនួនជាការេប្រាកដមានលេខបីខ្ទង់ចុងក្រោយហើយចែកដាច់នឹង$56$។
+\item គណនាតម្លៃនៃកន្សោម $A=\log_n \sqrt{n \sqrt[3]{n^2\sqrt[4]{n^3\cdots \sqrt[n]{n^{n-1}}}}}$ ។
+\item កំណត់តម្លៃ $x$ ប្រសិនបើ $3^x-2^x=\left(3+2\right)\left(3^2+2^2\right)\left(3^4+2^4\right)\cdots \left(3^{32}+2^{32}\right)$ ។
+\item គណនាតម្លៃនៃ $5\sqrt{3\sqrt{5\sqrt{3\cdots}}}$។
+\item 
+\begin{enumerate}[a]
+\item រកសំណល់នៃវិធីចែកតាមបែបអឺគ្លីតនៃ $2^{2015}$ នឹង $7$។
+\item រកចំនួនគត់វិជ្ជមាន $k$ ដែល $2^{2015}+k \vdots 7$។
+\end{enumerate}
+\item បង្ហាញថា $\log_2 \cos20^{\circ}+\log_2 \cos40^{\circ}+\log_2\cos80^{\circ}=-3$។
+\item គណនាតម្លៃ $10\sqrt{10\sqrt{10\sqrt{10\cdots}}}$។
+\item បង្ហាញថា $A=1^n+8^n-3^n-6^n$​ ចែកដាច់នឹង $10$ គ្រប់តម្លៃ$n$។
+\item គេឱ្យ $f_0(x)=\frac{1}{x-1}$ ហើយ $f_n(x)=f_0\left(f_{n-1}(x)\right)$​ដែល $n=1,2,3,\cdots$ ។​ គណនាតម្លៃនៃ $f_{2019}(2019)$។​
+\item បង្ហាញថា $A=2+2^2+2^3+\cdots+2^{60}$ ចែកដាច់នឹង $105$។
+\item ស្រាយបញ្ជាក់ថា $2009^{3^{2016n+2013}}+2010^{2^{2016n+2013}}$ចែកដាច់នឹង $11$។
+\item រកលេខបីខ្ទង់ចុងក្រោយនៃ $1993^{1994^{1995^{\cdots^{10000}}}}$។
+\item បង្ហាញថាចំនួន $A=2^{2^{2016}}+2^{2^{2015}}+1$​ ចែកដាច់នឹង $21$។
+\item រកសំណល់ពេល $\left(n^2+n+41\right)^2$ចែកនឹង $12$។
+\item រកលេខខ្ទង់ចុងក្រោយនៃផលបូក $A=1+\underbrace{2^{2^{\cdots^{2}}}}_{2015\text{ដង}}+\underbrace{3^{3^{\cdots^{3}}}}_{2015\text{ដង}}+\underbrace{4^{4^{\cdots^{4}}}}_{2015\text{ដង}}+\underbrace{5^{5^{\cdots^{5}}}}_{2015\text{ដង}}+\underbrace{6^{6^{\cdots^{6}}}}_{2015\text{ដង}}+\underbrace{7^{7^{\cdots^{7}}}}_{2015\text{ដង}}$ ។
+\item ស្រាយបញ្ជាក់សមភាព
+\begin{enumerate}[a]
+\item $kC_n^k=nC_{n-1}^{k-1}$
+\item $nC_{2n}^{n}=(n+1)C_{2n}^{n+1}$
+\end{enumerate}
+\item រកតួទី$13$នៃទ្វេធាញូតុន $\left(\sqrt[3]{3}-\sqrt{15}\right)^{15}$។
+\item ក្នុងទ្វេធាញូតុន $\left(3x^3-\frac{2}{x^2}\right)^{2015}$  រកមេគុណនៃតួមាន $x^{10}$។
+\item សម្រួលកន្សោម $H=C_n^0+2C_n^1+3C_n^2+\cdots+(n+1)C_n^n$
+\item គណនាផលបូក
+\begin{enumerate}[A]
+\item $=C_n^0+3C_n^1+3^2C_n^2+\cdots+3^nC_n^n$
+\item $=C_{2n}^2+C_{2n}^4+\cdots+C_{2n}^{2n}$
+\item $=2C_n^1+2^2C_n^2+\cdots+2^nC_n^n$
+\item $=1-2C_n^1+2^2C_n^2-2^3C_n^3+\cdots+(-1)^n2^nC_n^n$ ។
+\end{enumerate}
+\end{enumerate}
+\newpage
+\begin{tikzpicture}[overlay,remember picture]
+\node at (10,0) {\includegraphics[width=38cm]{Bart-Simpson-Wallpaper2}};
+	\draw [black!70,fill=red!10,fill opacity = 0.5,thick,rounded corners=5ex] (30,-1) rectangle (5,1);
+	\draw [black!70,thick,rounded corners=5ex] (30,-1.2) rectangle (5,1.2);
+	\draw [black!70,thick,rounded corners=5ex] (30,-1.3) rectangle (5,1.3);
+	\node[white] at (11,0) {\fontsize{40}{100}\selectfont\kml ផ្នែកដំណោះស្រាយ};
+	\node[black!80] at (11.07,0) {\fontsize{40}{100}\selectfont\kml ផ្នែកដំណោះស្រាយ};
+\end{tikzpicture}
+	\vspace*{2.6cm}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថាផលបូកគូបនៃបីចំនួនគត់តគ្នាចែកដាច់នឹង​​$9$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថាផលបូកគូបនៃបីចំនួនគត់តគ្នាចែកដាច់នឹង​​$9$\\
+តាង $n-1, n,n+1$​ជាបីចំនួនគត់តគ្នា\\
+តាង $A$​ជាផលបូកនៃបីចំនួនគត់តគ្នា\\
+$\begin{aligned}
+\text{គេបាន}​  A&=\left(n-1\right)^3+n^3+\left(n+1\right)^3=n^3-3n^2+3n-1+n^3+3n^2+3n+1\\
+&=3n^3+6n=3n\left(n^2+2\right)=3n\left(n^2-1+3\right)\\
+&=3n\left(n^2-1\right)+9n=3n\left(n-1\right)\left(n+1\right)+9n
+\end{aligned}$\\
+ដោយ$9n\vdots 9$\\
+ហើយ $n(n-1)(n+1)\vdots3!\vdots6$
+ \;
+ \begin{tikzpicture}
+ \node [rectangle callout,draw=magenta!70,fill=magenta!70,callout absolute pointer={(0,1)}
+] at (5,1) {\kml រូបមន្ត​ $n(n+1)(n+2)\cdots(n+k)\vdots k!$};
+ \end{tikzpicture}\\
+នោះ $3n(n-1)(n+1)\vdots 9$\\
+នោះ $A\vdots9$ (ពិត)\\
+\fbox{\so  ផលបូកគូបនៃបីចំនួនគត់តគ្នាចែកដាច់នឹង​​$9$}
+\end{proof}
+\begin{exercise}
+ស្រាយថាចំពោះគ្រប់$n$ជាចំនួនគត់
+\begin{enumerate}[a]
+\item $3n^4-14n^3+21n^2-10n \vdots 24$
+\item $n^5-5n^3+4n \vdots 120$​ ។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយថាចំពោះគ្រប់$n$ជាចំនួនគត់
+\begin{enumerate}[a]
+\item  $3n^4-14n^3+21n^2-10n \vdots 24$\\
+តាង $B= 3n^4-14n^3+21n^2-10n$\\
+$\begin{aligned}[t]
+\text{គេបាន}\;​ B&=n\left(3n^3-14n^2+21n-10\right)=n\left(3n^3-3n^2-11n^2+11n+10n-10\right)\\
+&=n\left[3n^2\left(n-1\right)-11n(n-1)+10(n-1)\right]=n(n-1)\left(3n^2-11n+10\right)\\
+&=n(n-1)\left(3n^2-6n-5n+10\right)=n(n-1)\left[3n(n-2)-5(n-1)\right]\\
+&=n(n-1)(n-2)(3n-5)=n(n-1)(n-2)(3n-9+4)\end{aligned}$\\
+$B=3n(n-1)(n-2)(n-3)+4n(n-1)(n-2)
+$\\
+ដោយ $n(n-1)(n-2)(n-3)=4!\vdots24$\\
+ហើយ $n(n-1)(n-2)\vdots3!\vdots6$\\
+$\Rightarrow 3n(n-1)(n-2)=3\times 6=24\vdots 24$\\
+$\Rightarrow B\vdots 24$\qquad (ពិត)\\
+\fbox{\so  $3n^4-14n^3+21n^2-10n \vdots 24$}
+\item $n^5-5n^3+4n \vdots 120$\\
+តាង $C=n^5-5n^3+4n$\\
+ $\begin{aligned}[t] 
+ \text{គេបាន} C&=n\left(n^4-5n^2+4\right)=n\left(n^4-2n^3+2n^3-4n^2-n^2+2n-2n+4\right)\\
+ &=n\left[n^3(n-2)+2n^2(n-2)-n(n-2)-2(n-2)\right]=n(n-2)\left(n^3+2n^2-n-2\right)\\
+ &=n(n-2)\left[n^2(n+2)-(n+2)\right]=n(n-2)(n+2)\left(n^2-1\right)\\
+ &=n(n-2)(n+2)(n-1)(n+1)=n(n-1)(n-2)(n+1)(n+2)\\
+  \end{aligned}$\\
+ដោយ $ n(n-1)(n-2)(n+1)(n+2)\vdots 5!\vdots 120$\\
+នោះ $B\vdots 120$\quad (ពិត)\\
+\fbox{\so $n^5-5n^3+4n$ចែកដាច់នឹង $120$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ ចំពោះ$n$គូស្រាយបញ្ជាក់ថា$20^n+16^n-3n-1$ចែកដាច់នឹង$323$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$20^n+16^n-3n-1$ចែកដាច់នឹង$323$\\
+តាង $S_n=20^n+16^n-3^n-1$\\
+ដោយ​ $323=17\times19$\\
+គេបាន$\begin{cases}20^n-3^n\vdots20-3\quad ,\forall n,n\text{គត់}\\16^n-1\vdots16+1\quad,\forall n,n\text{គូ}\end{cases}$
+ $\Rightarrow S_n\vdots 17$\quad (1)\\
+ម្យ៉ាងទៀត\\
+$\begin{cases}20^n-1\vdots20-1\quad,\forall n,n\text{គត់}\\16^n-3^n\vdots 16+3\quad,\forall n,n\text{គូ}\end{cases}$
+$\Rightarrow S_n\vdots19\quad(2)$\\
+តាម (1)និង (2)គេបាន\\
+$S_n\vdots323$\quad (ពិត)\\
+\fbox{\so$20^n+16^n-3n-1$ចែកដាច់នឹង$323$} 
+\end{proof}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថាចំពោះគ្រប់$n$ជាចំនួនគត់ធម្មជាតិៈ
+\begin{enumerate}[a]
+\item $11^{n+2}+12^{2n+1} \vdots 133$
+\item $5^{n+2}+26\times 5^n+8^{2n+1} \vdots 59$
+\item $7\times5^{2n}+12\times6^n \vdots 19$។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា
+\begin{enumerate}[a]
+\item $11^{n+2}+12^{2n+1} \vdots 133$\\
+តាង $B_n=11^{n+2}+12^{2n+1} $\\
+$\begin{aligned}
+\text{គេបាន} B_n&=11^2\cdot11^n+\left(12^2\right)^n\cdot12\\
+&=121\cdot11^n+144^n\cdot12=121\cdot11^n+\left(133+11\right)^n\cdot12\\
+&\equiv 121\cdot11^n+11^n\cdot12\equiv 133\cdot11^n\quad (mod 133)\end{aligned}$\\
+$
+B_n\equiv 0\quad (mod 133)
+$\\
+$\Rightarrow B_n\vdots133$\quad (ពិត)\\
+\fbox{\so $11^{n+2}+12^{2n+1} \vdots 133$}
+\item $5^{n+2}+26\times 5^n+8^{2n+1} \vdots 59$\\
+តាង $C=5^{n+2}+26\times 5^n+8^{2n+1}$\\
+$\begin{aligned}[t]
+\text{គេបាន} C&=25\cdot5^n+26\cdot5^n+8\cdot8^{2n}\\
+&=25\cdot5^n+26\cdot5^n+64^n\cdot8=51\cdot5^n+(59+5)^n\cdot8\\
+&\equiv 51\cdot5^n+5^n\cdot8\equiv 59\cdot5^n\equiv 0\quad(mod59)\\
+\end{aligned}$\\
+$\Rightarrow C\vdots59$\quad(ពិត)\\
+\fbox{\so $5^{n+2}+26\times 5^n+8^{2n+1} \vdots 59$}
+\item $7\times5^{2n}+12\times6^n \vdots 19$\\
+គេបាន$\begin{aligned}[t]
+&7\times5^{2n}+12\times6^n=7\times25^n+12\times6^n
+=7\times(19+6)^n+12\times6^n\\
+&\equiv 7\times6^n+12\times6^n\equiv 19\times6^n\quad(mod19)
+\end{aligned}$\\
+$\Rightarrow 7\times5^{2n}+12\times6^n \vdots 19$\quad(ពិត)\\
+\fbox{\so $7\times5^{2n}+12\times6^n \vdots 19$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថា
+\begin{enumerate}[a]
+\item ${2222}^{5555}+{5555}^{2222} \vdots 7$
+\item $4^{2n}-3^{2n}-7 \vdots 168,\forall n \in {\N}$
+\item $2^{2^{2n}}+5 \vdots 7 ,\forall n \in {\N},n>1$
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា
+\begin{enumerate}[a]
+\item ${2222}^{5555}+{5555}^{2222} \vdots 7$\\
+ដោយ $2222=7\times317+3$\\
+ហើយ$5555=7\times794-3$\\
+គេបាន$\begin{aligned}[t]
+&{2222}^{5555}+{5555}^{2222}=\left(7\times317+3\right)^{5555}+\left(7\times794-3\right)^{2222}\\
+&\equiv 3^{5555}+3^{2222}\equiv 3^{2222}\left(3^{3333}+1\right)\quad(mod7)\\
+&\equiv 3^{2222}\left[\left(3^3\right)^{1111}+1\right]\equiv 3^{2222}\left(27^{1111}+1\right)\quad(mod7)\\
+&\equiv 3^{2222}\left[(28-1)^{1111}+1\right]\equiv 3^{2222}\left[(-1)^{1111}+1\right]\quad(mod7)\\
+&\equiv 3^{2222}(-1+1)\equiv 0\quad(mod7)
+\end{aligned}$\\
+$\Rightarrow{2222}^{5555}+{5555}^{2222} \vdots 7$\quad (ពិត)\\
+\fbox{\so ${2222}^{5555}+{5555}^{2222} \vdots 7$}
+\item $4^{2n}-3^{2n}-7 \vdots 168,\forall n \in {\N}$\\
+តាង $S=4^{2n}-3^{2n}-7 \vdots 168$\\
+ដោយ $168=3\times7\times8$\\
++បង្ហាញថា $S\vdots3$\\
+$\begin{aligned}[t]\Rightarrow S&=4^{2n}-3^{2n}-7=16^n-9^n-9^n-7=(3\times5+1)^n-9^n-(6+1)\\
+&\equiv 1^n-0-1\equiv 0\quad(mod3)\end{aligned}$\\
+$\Rightarrow S\vdots3\quad(1)$\\
++បង្ហាញថា $S\vdots7$\\
+$\begin{aligned}[t]
+\Rightarrow S&=4^{2n}-3^{2n}-7=16^n-9^n-7=(2\times7+2)^n-(7+2)^n-7\\
+&\equiv 2^n-2^n-0\equiv 0\quad(mod7)
+\end{aligned}$\\
+$\Rightarrow S\vdots 7\quad (2)$\\
++បង្ហាញថា $S\vdots 8$\\
+$\begin{aligned}[t]
+\Rightarrow S&=4^{2n}-3^{2n}-7=16^n-9^n-7=16^n-(8+1)^n-(8-1)\\
+&\equiv -1+1\equiv 0\quad(mod8)
+\end{aligned}$\\
+$\Rightarrow S\vdots8\quad(3)$\\
+តាម $(1),(2)$និង $(3)$គេបានៈ\\
+$S\vdots168$\quad(ពិត)\\
+\fbox{\so  $4^{2n}-3^{2n}-7 \vdots 168,\forall n \in {\N}$}
+\item $2^{2^{2n}}+5 \vdots 7 ,\forall n \in {\N},n>1$\\
+ដោយ $2^3\equiv1(mod7)$\\
+យក $2^{2n}$ចែកនឹង $3$គេបានៈ\\
+$2^{2n}=4^n=(3+1)^n\\
+\equiv 1(mod3)\\
+\Rightarrow 2^{2n}=3k+1\\
+\Rightarrow2^{2^{2n}}+5=2^{3k+1}+5\\
+=2\cdot8^k+5=2(7+1)^k+5\\
+\equiv 2+7\equiv 0(mod7)$\\
+$\Rightarrow 2^{2^{2n}}+5\vdots7$\quad(ពិត)\\
+\fbox{\so $2^{2^{2n}}+5 \vdots 7 ,\forall n \in {\N},n>1$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+គេឱ្យ $f(x)$ ជាពហុធាមានមេគុណជាចំនួ​នគត់ $f(x)=a_{n}x^{n}+a_{n-1}x^{n-1}+\cdots+a_{1}x+a_{o}$ ដែល ​$a_{i}\in{\Z}$\\ $i=0,1,2,\cdots,n$និង$a,b$ ជាពីរចំនួនគត់ផ្សេងគ្នា។​ ស្រាយថា$f(a)-f(b) \vdots a-b$\\ អនុវត្តៈ គ្មានពហុធា$P(x)$ណាមានមេគុណជាចំនួនគត់​អាចមានតម្លៃ$P(7)=5$និង$P(15)=9$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា $f(a)-f(b)\vdots a-b$\\
+យើងមាន $f(x)=a_{n}x^{n}+a_{n-1}x^{n-1}+\cdots+a_{1}x+a_{o}$\\
+គេបានៈ \\
+$
+-\underline{\begin{cases}
+f(x)=a_na^n+a_{n-1}a^{n-1}+\cdots+a_1a+a_0\\
+f(b)=a_nb^n+a_{n-1}b^{n-1}+\cdots+a_1b+a_0
+\end{cases}}$\\
+$\Rightarrow f(a)-f(b)=a_n\left(a^n-b^n\right)+a_{n-1}\left(a^{n-1}-b^{n-1}\right)+\cdots+a_1\left(a-b\right)$\\
+ដោយ $\begin{aligned}[t]&a^n-b^n\vdots a-b\; ,\forall k\in \Z\\
+&a^{n-1}-b^{n-1}\vdots a-b\\
+&a-b\vdots a-b 
+\end{aligned}$\\
+នោះ $f(a)-f(b)\vdots a-b$\quad(ពិត)\\
+\fbox{\so $f(a)-f(b)\vdots​ a-b$}\\
+$\looparrowright$ស្រាយថាគ្មានពហុធា$P(x)$ណាមានមេគុណជាចំនួនគត់អាចមានតម្លៃ$P(7)=5$និង $P(15)=9$\\
+ឧបមាថា $P(x)$មានមេគុណជាចំនួនគត់\\
+តាមសម្រាយបញ្ជាក់ខាងលើគេបាន\\
+$\begin{aligned}[t]
+P(15)-P(7)&\vdots 15-7\\
+9-5&\vdots 8\\
+4&\vdots 8\quad\text{(មិនពិត)}
+\end{aligned}$\quad(មិនពិត)\\
+\fbox{\so គ្មានពហុធា$P(x)$ណាមានមេគុណជាចំនួនគត់អាចមានតម្លៃ$P(7)=5$និង $P(15)=9$}
+\end{proof}
+\begin{exercise}
+ ស្រាយបញ្ជាក់ថាបើ$n$មិនចែកដាច់$3$នោះ$3^{2n}+3^n+1 \vdots 13$ ។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា $3^{2n}+3^n+1 \vdots 13 $\\
+ដោយ​ $n$ ចែកមិនដាច់នឹង $3$\\
+តាង $n=3k+r\quad ,r=1,2$\\
+តាង $P(n)=3^{2n}+3^n+1 \vdots 13$\\
+$\begin{aligned}[t]
+\text{គេបាន} P(n)&=3^{2(3k+r)}+3^{3k+r}+1=3^{2\times 3k}\cdot 3^{2r}+3^{3k}\cdot3^r+1\\
+&=27^{2k}\cdot 3^{2r}+27^k\cdot3^r+1=(26+1)^{2k}\cdot 3^{2r}+(26+1)^k\cdot3^r+1\\
+&\equiv 3^{2r}+3^r+1\quad(mod 13)\\
+\end{aligned}$\\
+$\looparrowright$បើ​$r=1$\\
+$\begin{aligned}[t]
+\Rightarrow P(n)&\equiv3^{2\times1}+3^1+1\equiv 9+3+1\quad(mod13)\\
+&\equiv 13\equiv 0\quad(mod 13)
+\end{aligned}$\\
+$\looparrowright \text{បើ}r=2$\\
+$\begin{aligned}[t]
+\Rightarrow P(n)&\equiv 3^{2\times2}+3^2+1\equiv 81+9+1\quad(mod 13)\\
+&\equiv 91\equiv 0\quad(mod 13)
+\end{aligned}$\\
+$\Rightarrow 3^{2n}+3^n+1 \vdots 13$\quad  (ពិត)\\
+\fbox{\so $3^{2n}+3^n+1 \vdots 13$}
+\end{proof}
+\begin{exercise}
+រកគ្រប់ចំនួនគត់ធម្មជាតិ$n$ដើម្បីឱ្យ$2^n-1 \vdots 7$។ ស្រាយថាចំពោះ$\forall n \in{\N}$\\នោះ$2^n+1\not \vdots$  $7$។
+\end{exercise}
+\begin{proof}[\solution]
+រកគ្រប់ចំនួនគត់ធម្មជាតិ$n$ដើម្បីឱ្យ$2^n-1 \vdots 7$\\
+ ដោយ $8=2^3\equiv 1\quad(mod 7)$\\
+  $\begin{aligned}[t]
+ \text{តាង} &n=3k\Rightarrow 2^{3k}-1\equiv 1-1\equiv 0\quad(mod 7)
+ \end{aligned}$\\
+  $\begin{aligned}[t]
+ \text{តាង} n&=3k+1\Rightarrow 2^{3k+1}-1=2^{3k}\cdot2-1\\
+  &\equiv 2-1\equiv 1\quad(mod 7)
+  \end{aligned}$\\
+  $\begin{aligned}[t]
+  \text{តាង}&n=3k+2\Rightarrow 2^{3k+2}-1=2^{3k}\cdot 4-1\\
+  &\equiv 4-1\equiv 3\quad(mod 7)
+ \end{aligned}$\\
+  \fbox{\so $n=3k$ ដែល $k\in{\N}$ធ្វើឱ្យ $2^n-1\vdots 7$}\\
+  +ស្រាយថាចំពោះ$\forall n \in{\N}$នោះ$2^n+1\not \vdots$  $7$\\
+តាង $n=3k+r ,r=0,1,2$\\
+$\begin{aligned}[t]
+2^n+1&=2^{3k+r}+1=2^{3k}\cdot 2^r+1\\
+&\equiv 2^r+1\quad(mod 7)
+\end{aligned}$\\
+$\begin{aligned}[t]
+\text{-បើ} r=0\Rightarrow 2^n+1&\equiv 2^0+1\\
+&\equiv 2\quad(mod7)
+\end{aligned}$\\
+-បើ​$r=1\Rightarrow 2^n+1\equiv 2^1+1\equiv 3\quad(mod 7)$\\
+-បើ $r=2\Rightarrow 2^n+1\equiv 2^2+1\equiv 5\quad(mod7)$\\
+នោះ$2^n+1\not \vdots7$\quad(ពិត)\\
+\fbox{\so $2^n+1\not \vdots7,\forall n \in {\N}$}
+ \end{proof}
+ \begin{exercise}
+ ដោយប្រើវិចារអនុមានរួម​ស្រាយបញ្ជាក់ថាចំពោះគ្រប់$n$
+\begin{enumerate}[a]
+\item $16^n-15n-1 \vdots 225$
+\item $3^{3n+3}-26n-27 \vdots 169$។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថាចំពោះ $\forall n\in{\N}$
+\begin{enumerate}[a]
+\item  $16^n-15n-1\vdots 225$\\
+តាង​ $f(n)=16^n-15n-1$\\
+$\begin{aligned}[t]
+\text{បើ} n=1\Rightarrow f(1)&=16^1-15\times 1-1\\
+&=0\vdots 225
+\end{aligned} $\\
+$\star$ឧបមាវាពិតដល់ $n=k\Rightarrow f(k)\vdots 225\quad,k>1$\\
+$f(k)=16^k-15k-1\vdots 225\\
+16^k-15k-1=225t\quad t\in{\N}\\
+16^k=225t+15k+1$\\
+$\star$ស្រាយថាវាពិតដល់​ $n=k+1\Rightarrow f(k+1)\vdots 225$\\
+$\begin{aligned}[t]
+f(k+1)&=16^{k+1}-15(k+1)-1\\
+&=16\times 16^k-15k-15-1=16(225t+15k+1)-15k-16\\
+&=16\times 225t+16\times15k+16-15k-16=16\times 225t+16\times 15k-15k\end{aligned}$\\
+$f(k+1)= 16\times 225t+15\times 15k=16\times 225t+225k=225(16t+k)\vdots 225$\\
+នោះ $f(n)\vdots 225$\quad(ពិត)\\
+\fbox{\so $16^n-15n-1 \vdots 225$}
+\item $3^{3n+3}-26n-27 \vdots 169$\\
+តាង​ $P(n)=3^{3n+3}-26n-27$\\
+$\begin{aligned}[t]
+\text{បើ}n=1\Rightarrow P(1)&=3^6-26-27\\
+&=676\vdots 169
+\end{aligned}$\\
+នោះ $P(1)\vdots 169$\quad(ពិត)\\
+ឧបមាវាពិតដល់ $n=k\Rightarrow P(k)\vdots 169\quad ,k>1$\\
+$\Rightarrow P(k)=3^{3k+3}-26\cdot k-27\vdots 169\\
+3^{3k+3}-26k-27=169t\quad ,t\in{\N}\\
+3^{3k+3}=169t+26k+27$\\
+ស្រាយវាថាពិតដល់ $n=k+1\Rightarrow P(k+1)\vdots 169$គេបានៈ\\
+$\begin{aligned}[t]
+ P(k+1)&=3^{3k+3+3}-26(k+1)-27=27\left(3^{3k+3}\right)-26k-53\\
+&=27(169t+26k+27)-26k-53=27\times 169t+27\times 26k+27\times 27-26k-53\\
+&=27\times 169t+27\times 26k+729-53=27\times 169t+676k+676\\
+&=27\times 169t+169\times 4k+169\times 4
+\end{aligned}$\\
+$P(k+1)=169(27t+4k+4)\vdots 169$\\
+$\Rightarrow P(k+1)\vdots 169$\quad (ពិត)\\
+\fbox{\so $3^{3n+3}-26n-27 \vdots 169$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ដោយប្រើវិចារអនុមានរួមស្រាយថាគ្រប់$n\in{\N}$
+\begin{enumerate}[a]
+\item $2^{2^{6n+2}}+3\vdots 19$
+\item $2^{2^{2n+1}}+3 \vdots 7$  ។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយថាគ្រប់$n\in{\N}$
+\begin{enumerate}[a]
+\item $2^{2^{6n+2}}+3\vdots 19$\\
+តាង $f(n)=2^{2^{6n+2}}+3$\\
+បើ $n=1$គេបាន\\
+$\begin{aligned}[t]
+f(1)&=2^{2^8}+3=2^{256}+3=\left(2^4\right)^{64}+3=(19-3)^{64}+3\\
+&\equiv 3^{64}+3\equiv \left(3^4\right)^{64}+3\equiv (19\times 4+5)^{16}+3\quad(mod19)\\
+&\equiv 5^{16}+3\equiv (25)^8+3\equiv (19+6)^8+3\quad(mod 19)\\
+&\equiv 6^8+3\equiv (36)^4+3\equiv (38-2)^4\quad (mod 19)\\
+&\equiv 2^4+3\equiv 19\equiv 0\quad(mod 19)
+\end{aligned}$\\
+នោះ $f(1)\vdots 19$\quad(ពិត)\\
+ឧបមាវាពិតដល់ $n=k$\\
+$\Rightarrow f(k)=2^{2^{6k}}+3\vdots 19\\
+2^{2^{6k}}=19t-3\quad ,t>0$\\
+ស្រាយថាវាពិតដល់ $n=k+1\Rightarrow f(k+1)\vdots 19$\\
+$\begin{aligned}[t]
+\text{គេបាន} &f(k+1)=2^{2^{6(k+1)+2}}+3=2^{2^{6k+6+2}}+3=2^{2^{6k+2}\cdot 2^6}+3\\
+&=\left(2^{2^{6k+2}}\right)^{64}+3=(19t-3)^{64}+3\\
+&\equiv 3^{64}+3\equiv 0\quad (mod 19)
+\end{aligned}$\\
+នោះ $f(n)\vdots 19$\quad (ពិត)\\
+\fbox{\so $2^{2^{6n+2}}+3\vdots 19$}
+\item $2^{2^{2n+1}}+3 \vdots 7$
+តាង $P(n)=2^{2^{2n+1}}+3$\\
+បើ $n=1$គេបាន\\
+$\begin{aligned}[t]
+P(1)&=2^{2^3}+3=2^8+3=256+3=259\\
+&\equiv 0\quad(mod7)
+\end{aligned}$\\
+$\Rightarrow P(1)\vdots 7$\quad (ពិត)\\
+ឧបមាវាពិតដល់ $n=K$\\
+$\Rightarrow P(k)=2^{2^{2k+1}}+3\vdots 7\\
+2^{2^{2k+1}}=7t-3\quad ;t>0$\\
+ស្រាយវាពិតដល់ $n=k+1$គេបាន\\
+$\begin{aligned}[t]
+P(k+1)&=2^{2^{2(k+1)+1}}+3=2^{2^{2k+2+1}}+3\\
+&=2^{2^{2k+1}\cdot 2^2}+3=\left(2^{2^{2k+1}}\right)^4+3=(7t-3)^4+3\\
+&\equiv 3^4+3\equiv 81+3\quad(mod 7)\\
+&\equiv 84\equiv 0\quad(mod7)
+\end{aligned}$\\
+នោះ $P(n)\vdots 7$\quad(ពិត)\\
+\fbox{\so $2^{2^{2n+1}}+3 \vdots 7$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ ដោយប្រើវិចារអនុមានរួមស្រាយបញ្ជាក់ថាចំពោះ$n\in{\N}$និង$k\in{\N}$,$k$សេសេ  គេបាន$k^{2^{n}}-1\vdots 2^{n+2}$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$k^{2^{n}}-1\vdots 2^{n+2}$\\
+តាង​$F(n)=k^{2^{n}}-1$\\
+បើ $n=1$គេបាន\\
+$F(1)=k^{2^1}-1\\
+=k^2-1=(k-1)(k+1)$\\
+ដោយ​$k$សេស\\
+តាង​$k=2t+1\quad t\in{\N}$គេបាន\\
+$\begin{aligned}[t]
+F(1)&=(2t+1-1)(2t+1+1)\\
+&=2t(2t+2)=4t(t+1)
+\end{aligned}$\\
+ដោយ​$t(t+1)\vdots 2$\\
+$\Rightarrow F(1)\vdots 2^{1+2}$\quad (ពិត)\\
+ឧបមាវាពិតដល់ $n=q\quad q>0$\\
+$\Rightarrow F(q)=k^{2^{q}}-1\vdots 2^{q+2}\\
+k^{2^q}=2^{q+2}\times p+1$\\
+ស្រាយវាពិតដល់ $n=q+1$គេបាន\\
+$\begin{aligned}[t]
+F(q+1)&=k^{2^{q+1}}-1=k^{2^q\cdot2}-1\\
+&=\left(k^{2^q}\right)^2-1=\left(2^{q+2}\times p+1\right)^2-1\end{aligned}$\\
+$\begin{aligned}[t]F(q+1)&=\left(2^{q+2}\right)^2\times p^2+2\cdot2^{q+2}\cdot p+1-1\\
+&=2^{2q+4}\cdot p^2+2^{q+3}\cdot p=2^{q+3}\left(2^{q+1}p^2+p\right)\vdots 2^{q+3}\end{aligned}$\\
+$\Rightarrow F(q+1)\vdots 2^{q+3}$\quad (ពិត)\\
+\fbox{\so $k^{2^{n}}-1\vdots 2^{n+2}$}
+\end{proof}
+\begin{exercise}
+ដោយប្រើវិចារអនុមានរួមស្រាយបញ្ជាក់ថា$\forall n \in n$
+\begin{enumerate}[a]
+\item $11^{n+2}+12^{2n+1}\vdots 133$
+\item $6^{2n+1}+5^{n+2}\vdots 31$
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$\forall n \in n$
+\begin{enumerate}[a]
+\item $11^{n+2}+12^{2n+1}\vdots 133$
+តាង​$g(n)=11^{n+2}+12^{2n+1}$\\
+បើ$n=1\Rightarrow g(1)\vdots 133\\
+g(1)=11^3+12^3=(11+12)(11^2-11\cdot 12+12^2)\\
+23(121-132+144)=23\times 133\vdots 133$\\
+$\Rightarrow g(1)\vdots 133$\quad(ពិត)\\
+ឧបមាវាពិតដល់ $n=k\quad ,k>0$គេបាន\\
+$g(k)=11^{k+2}+12^{2k+1}\vdots 133\\
+12^{2k+1}=133t-11^{k+2}$\\
+ស្រាយវាពិតដល់ $n=k+1$គេបាន\\
+$\begin{aligned}[t] 
+g(k+1)&=11^{k+1+2}+12^{2(k+1)+1}=11\cdot 11^{k+2}+144\cdot 12^{2k+1}\\
+&=11\cdot 11^{k+2}+144\left(133t-11^{k+2}\right)=11\cdot 11^{k+2}+144\cdot 133t-144\cdot 11^{k+2}\\
+&=144\cdot 133t-133\cdot 11^{k+2}=133\left(144t-11^{k+2}\right)\vdots 133
+\end{aligned}$\\
+នោះ $g(n)\vdots 133$\quad (ពិត)\\
+\fbox{\so $11^{n+2}+12^{2n+1}\vdots 133$}
+\item $6^{2n+1}+5^{n+2}\vdots 31$
+តាង $P(n)=6^{2n+1}+5^{n+2}$\\
+បើ $n=1\Rightarrow P(1)\vdots 133$គេបាន\\
+$\begin{aligned}[t]
+P(1)&=6^3+5^3=216+125\\
+&=341\vdots 31
+\end{aligned}$\\
+ឧបមាវាពិតដល់$n=k\quad,k>0$គេបាន\\
+$P(k)=6^{2k+1}+5^{k+2}\vdots 31\\
+6^{2k+1}=31t-5^{k+2}$\\
+ស្រាយថាវាពិតដល់$n=k+1$គេបាន\\
+$\begin{aligned}[t]
+P(k+1)&=6^{2(k+1)+1}+5^{k+3}=6^{2k+2+1}+5^{k+3}\\
+&=36\cdot 6^{2k+1}+5\cdot 5^{k+2}=36\left(31t-5^{k+2}\right)+5\cdot 5^{k+2}\\
+&=36\cdot 31t-36\cdot 5^{k+2}+5\cdot 5^{k+2}=36\cdot 31t-31\cdot 5^{k+2}\vdots 31\\
+\end{aligned}$\\
+$\Rightarrow P(n)\vdots 31\quad$(ពិត)\\
+\fbox{\so $6^{2n+1}+5^{n+2}\vdots 31$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថា$x+\frac{1}{2}\in{\Z}$នោះ$x^n+\frac{1}{x^n}\in{\Z}$ចំពោះ$x\in{\N}$។. 
+\end{exercise}
+\begin{proof}[\underline{\kv ដំណោះស្រាយ}]
+ស្រាយបញ្ជាក់ថា​$x^n+\frac{1}{x^n}\in{\Z}$ចំពោះ$x\in{\N}$\\
+បើ​$n=1\Rightarrow x+\frac{1}{x}\in {\Z}$\\
+ឧបមាវាពិតដល់ $n=k\Rightarrow x^k+\frac{1}{x^k}\in {\Z}$\\
+ស្រាយវាពិតដល់$n=k+1$គេបាន\\
+$x^{k+1}+\frac{1}{x^{k+1}}\in \Z$\\
+ដោយ​​$\left(x+\frac{1}{x}\right)\left(x^k+\frac{1}{x^k}\right)\in \Z\\
+\left(x^{k+1}+\frac{1}{x^{k-1}}+x^{k-1}+\frac{1}{x^{k+1}}\right)\in \Z$\\
+$\left(x^{k+1}+\frac{1}{x^{k+1}} \right)+ \left(x^{k-1}+\frac{1}{x^{k-1}}\right)\in \Z$\\
+ដោយដឹងថា $\left(x^{k-1}+\frac{1}{x^{k-1}}\right)\in \Z$\\
+នោះ $x^{k+1}+\frac{1}{x^{x+1}}\in \Z$\quad (ពិត)\\
+\fbox{\so $x^{k+1}+\frac{1}{x^{x+1}}\in \Z\quad , \forall n\in \N$}
+\end{proof}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថា$1^{2002}+2^{2002}+3^{2002}+\cdots+2002^{2002} \vdots 11$
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$1^{2002}+2^{2002}+3^{2002}+\cdots+2002^{2002} \vdots 11$\\
+តាង​$A=1^{2002}+2^{2002}+3^{2002}+\cdots+2002^{2002}$\\
+យក​$a\in \N , gcd(a,11)=1$\\
+តាមទ្រឹស្តីបទ $Fermat\quad a^{11-1}\equiv 1(mod 11)$\\
+$\Rightarrow a^{2002}=\left(a^{10}\right)^{200}\times a^2\equiv a^2(mod 11)
+$\\
+យក​$a=1,2,3\cdots ,2002$\\
+$
+\bullet\text{បើ}a=1\Rightarrow 1^{2002}\equiv 1^{2}\quad (mod11)\\
+\bullet\text{បើ}a=2\Rightarrow 2^{2002}\equiv 2^2\quad(mod11)\\
+\bullet\text{បើ}a=3\Rightarrow 3^{2002}\equiv 3^2\quad(mod11)\\
+\cdot\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\\
+\bullet\text{បើ}a=2002\Rightarrow 2002^{2002}\equiv 200^2(mod11)
+$\\
+យកអង្គបូក​នឹងអង្គគេបាន\\
+ $\begin{aligned}[t] A&\equiv 1^2+2^2+3^2+\cdots+2002^2
+ \equiv \frac{1}{6}\times 2002(2002+1)(2\times2002+1)\quad(mod 11)\\
+ &\equiv \frac{1}{6}\times 2002\times 2003\times 4005
+ \equiv 1001\times 2003\times 1335\quad(mod 11)\\
+ &\equiv 7\times 11\times 13\times 2003\times 1335\equiv 0\quad(mod 11)
+\end{aligned}$\\
+ \fbox{\so $1^{2002}+2^{2002}+3^{2002}+\cdots+2002^{2002} \vdots 11$}
+\end{proof}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថា$3^{2^{4n+1}}+2^{3^{4n+1}}+5 \vdots 22$ចំពោះ$\forall n \in {\N}$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$3^{2^{4n+1}}+2^{3^{4n+1}}+5 \vdots 22$ចំពោះ$\forall n \in {\N}$\\
+តាង $B=3^{2^{4n+1}}+2^{3^{4n+1}}+5$\\
+ដោយ​$22=2\times 11$\\
+$\begin{aligned}[t]
+\Rightarrow B&=(2+1)^{2^{4n+1}}+2^{3^{4n+1}}+(4+1)\\
+&\equiv 2\equiv 0\quad(mod11)
+\end{aligned}$\\
+$\Rightarrow B\vdots 2$\\
+តាមទ្រឹស្តីបទ$Fermat$\\
+ដោយ​$gcd(3,11)=1\quad ,gcd(2,11)=1\text{គេបាន}\\
+3^{11-1}\equiv 1(mod11)\\
+2^{11-1}\equiv 1(mod11) $\\
+$\begin{aligned}[t]
+\text{នោះ} 2^{4n+1}&=2\left(2^4\right)^n=2(10+6)^n\\
+&\equiv 2\times 6^n\equiv 2\quad (mod10)\\
+\end{aligned}$\\
+$2^{4n+1}=10k+2$\\
+យក​$3^{4n+1}$ចែកនឹង$10$គេបាន\\
+$\begin{aligned}[t]
+3^{4n+1}&=3\left(3^2\right)^{2n}=3(10-1)^{2n}\\
+&\equiv 3\quad (mod10)
+\end{aligned}$\\
+$\Rightarrow 3^{4n+1}=10t+3$\\
+$\begin{aligned}[t]
+\text{គេបាន} B&=3^{2^{4n+1}}+2^{3^{4n+1}}+5=3^{10k+2}+2^{10t+3}+5=3^2\left(306{10}\right)+2^3\left(2^{10}\right)^k+5\\
+&\equiv 9+8+5\equiv 22\equiv 0\quad (mod11)
+\end{aligned}$\\
+នាំឱ្យ​$B\vdots 11$\quad (ពិត)\\
+\fbox{\so $3^{2^{4n+1}}+2^{3^{4n+1}}+5 \vdots 22$ចំពោះ$\forall n \in {\N}$}
+\end{proof}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថា$\forall n \in{\N}$
+\begin{enumerate}[a]
+\item $2^{2^{6n+2}}+3 \vdots 19$
+\item $2^{2^{2n+1}}+3 \vdots 7$
+\item $2^{2^{4n+1}}+7 \vdots 11$ ។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$\forall n \in{\N}$
+\begin{enumerate}[a]
+\item $2^{2^{6n+2}}+3 \vdots 19$\\
+ដោយ​$gcd(2,19)=1$\\
+តាមទ្រឹស្តីបទ$Fermat$\\
+$2^{19-1}\equiv 1\quad (mod 19)$\\
+យក​​​ $2^{6n+2}$ចែកនឹង​$18$គេបាន\\
+$\begin{aligned}[t]
+2^{6n+2}&=2^2\cdot 2^{6n}
+=4 \left( 2^3\right)^{2n}=4\left(9-1\right)^{2n}\\
+&\equiv 4\quad (mod 18)
+\end{aligned}$\\
+$\Rightarrow 2^{6n+2}=18k+4$\\
+$\begin{aligned}[t]
+\Leftrightarrow &2^{2^{6n+2}}+3=2^{18k+4}+3=2^4\cdot 2^{18k}+3\\
+&\equiv 19\equiv 0\quad(mod19)
+\end{aligned}$\\
+នាំឱ្យ​$2^{2^{6n+2}}+3 \vdots 19$\quad (ពិត)\\
+\fbox{\so $2^{2^{6n+2}}+3 \vdots 19 $}
+\item $2^{2^{2n+1}}+3 \vdots 7$\\
+ដោយ​$gcd(2,7)=1$\\
+តាមទ្រឹស្តីបទ$Fermat\\
+2^6\equiv 1\quad (mod7)$\\
+យក​$2^{2n+1}$ចែកនឹង​$6$\\
+$\begin{aligned}[t]
+\text{គេបាន} 2^{2n+1}&=2\cdot\left(2^2\right)^n=2(3+1)^n\\
+&\equiv 2\quad (mod6)
+\end{aligned}$\\
+$\Rightarrow 2^{2n+1}=6t+2\quad ,t\in{\R}$\\
+$\text{គេបាន​} {2^{2n+1}}+3=2^{6t+2}+2=2^{6t}\cdot 2^2+3\\
+\equiv 4+3\equiv 0\quad (mod7)$\\
+\fbox{\so $2^{2^{2n+1}}+3 \vdots 7$}
+\item $2^{2^{4n+1}}+7 \vdots 11$
+ដោយ​$gcd(2,11)=1$\\
+តាមទ្រឹស្តីបទ$Fermat\\
+\text{គេបាន} 2^{10}\equiv 1\quad(mod11)$\\
+យក​$2^{4n+1}$ចែកនឹង​$10$\\
+$\begin{aligned}[t]
+\text{គេបាន} 2^{4n+1}&=2\left(10+6\right)^n\\
+&\equiv 2\times 6^n\equiv  2\times 6\equiv 2\quad(mod10)
+\end{aligned}$\\
+$\Rightarrow 2^{4n+1}=10k+2\quad ,k\in \R$\\
+$\begin{aligned}[t]
+\text{គេបាន} 2^{2^{4n+1}}+7&=2^{10k+2}+7=2^{10k}\cdot 2^2+7=2^{10k}\cdot 4+7\\
+&\equiv 4+7\equiv 0\quad (mod11)
+\end{aligned}$\\
+\fbox{\so $2^{2^{4n+1}}+7 \vdots 11$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ស្រាយញ្ជាក់ថា$a_1+a_2+\cdots+a_{2018} \vdots 30$នោះ
+${a_1}^5+{a_2}^5+\cdots+a_{2018}^5 \vdots 30$ចំពោះ${a_i}\in{\N} \\,i=1,2,\cdots,2018$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយថា​${a_1}^5+{a_2}^5+\cdots+a_{2018}^5 \vdots 30$\\
+$\begin{aligned}[t]
+\text{តាង}& M=a_1+a_2+\cdots+a_{2018}\\
+&N={a_1}^5+{a_2}^5+\cdots+a_{2018}^5
+\end{aligned}$\\
+ស្រាយថាបើ​$M\vdots 30$នោះ​$N\vdots 30$\\
+$\begin{aligned}[t]
+\text{សង្កេត} &a_i^5-a_i=a_i\left(a_i^4-1\right)=a_i(a_i^2-1)(a_i^2+1)\\
+&=a_i(a_i-1)(a_i+1)(a_i^2+1)
+\end{aligned}​​ $\\
+ដោយ​ $a_i(a_i-1)(a_i+1)\vdots 3!\vdots 6\\
+\Rightarrow a_i^5-a_i\vdots 6$\\
+ចំពោះ​$i=1,2,\cdots,2018$គេបាន\\
+$
+\bullet\text{បើ}i=1\Rightarrow a_1^5-a_1\vdots 6\\
+\bullet\text{បើ}​i=2\Rightarrow a_2^5-a_2\vdots 6\\
+\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\\
+\bullet\text{បើ}i=2018\Rightarrow a_{2018}^5-a_{2018}\vdots 6
+$\\
+បូកអង្គនឹងអង្គគេបានៈ\\
+$a_1^5-a_1+a_2^5-a_2+\cdots+a_{2018}^5-a_{2018}\vdots 6$\\
+$\left(a_1^5+a_2^5+\cdots+a_{2018}^5\right)-\left(a_1+a_2+\cdots+a_{2018}\right)\vdots6\\
+\Rightarrow N-M\vdots 6$
+ដោយ​$M\vdots6$\quad (ព្រោះ$M\vdots30$)\\
+នោះ​$N\vdots6$\quad $(1)$\\
+តាមទ្រឹស្តីបទ$Fermat\quad ,a_i\in \N$\\
+$a_i^5\equiv a_i\quad(mod5)\\
+a_i^5-a_i\equiv 0\quad(mod5)$\\
+បូកអង្គនឹងអង្គ​$N-M\vdots6$\\
+ដោយ​$M\vdots5$(ព្រោះ$M\vdots30$)\\
+នោះ​$N\vdots5\quad(2)$\\
+តាម​$(1)$និង​$(2)$គេបាន​$N\vdots5\quad$(ពិត)\\
+\fbox{\so ​${a_1}^5+{a_2}^5+\cdots+a_{2018}^5 \vdots 30$}
+\end{proof}
+\begin{exercise}
+ ស្រាយបញ្ជាក់ថា$2^{70}+3^{70} \vdots 13$។
+\end{exercise} 
+\begin{proof}[\solution]
+ ស្រាយបញ្ជាក់ថា$2^{70}+3^{70} \vdots 13$\\
+ ដោយ​$gcd(2,13)=1 ,gcd(3,13)=1$\\
+ តាមទ្រឹស្តីបទ$Fermat$គេបាន\\
+ $2^{12}\equiv 1\quad (mod13)\\
+ 3^{12}\equiv 1\quad(mod13)$\\
+$\begin{aligned}[t]
+ \Rightarrow 2^{70}+3^{70}&=\left(2^{12}\right)^5\times 2^{10}+\left(3^{12}\right)^5\times 3^{10}\\
+ &\equiv 2^{10}+3^{10}\equiv \left(2^2\right)^5+\left(3^2\right)^5\quad(mod13)
+ \end{aligned}$\\
+ តាមរូបមន្ត​ $a^n+b^n\vdots a+b$\;បើ​$n$សេស\\
+ $\begin{aligned}[t]
+ \text{គេបានៈ}&​2^{70}+3^{70}\equiv \left(2^2\right)^5+\left(3^2\right)^5\equiv 4^5+9^5\equiv (4+9)(4^4-4^3\cdot9+\cdots+9^4)\quad(mod13)\\
+ &\equiv 13(4^4-4^3\cdot9+\cdots+9^4)\equiv 0\quad (mod13)
+ \end{aligned}$\\
+ \fbox{\so $2^{70}+3^{70}\vdots 13$}
+\end{proof}
+\begin{exercise}
+ $p$ជាចំនួនបឋមធំជាង$7$។ ស្រាយថា$3^p-2^p-2 \vdots 42p$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយថា$3^p-2^p-2 \vdots 42p$\\
+តាង​$A=3^p-2^p-2 $\\
+ដោយ​​ $42p=2\times 3\times 7\times p$\\
+$\ast$បង្ហាញថា​$A\vdots2$\\
+$\begin{aligned}[t]
+\text{គេបាន}A&=3^p-2^p-1=(2+1)^p-2^p-1\\
+&\equiv 1-0-1\equiv 0\quad(mod2)
+\end{aligned}$\\
+$\Rightarrow A\vdots2\qquad(1)$\\
+$\ast$បង្ហាញ$A\vdots3$\\
+$\begin{aligned}[t]
+\text{គេបាន}​A&=3^p-2^p-1=3^p-(3-1)^p-1\\
+&\equiv 0-0+1-1\equiv 0\quad(mod3)
+\end{aligned}$\\
+$\Rightarrow A\vdots 3\qquad(2)$\\
+$\ast$បង្ហាញថា​$A\vdots7$\\
+ដោយ​$gcd(3,7)=1\quad , gcd(2,7)=1$\\
+តាមទ្រឹស្តីបទ​$Fermat$\\
+$3^6\equiv 1\quad(mod7)\\
+2^6\equiv 1\quad(mod7)$\\
+ដោយ​$p$ជាចំនួនបឋមធំជាង​$7$\\
+តាង$p=6k+5,6k+1\\
+A=3^p-2^p-1$\\
+$\begin{aligned}[t]
+\Leftrightarrow A&=3^{6k+5}-2^{6k+5}-1\\
+&\equiv 3^5-2^5-1\equiv 243-32-1\quad(mod7)\\
+&\equiv 210\equiv 0\quad(mod7)\\
+\end{aligned}$\\
+$\begin{aligned}[t]
+\Leftrightarrow A&=3^{6k+1}-2^{6k+1}-1\\
+&\equiv 3-2-1\equiv 0\quad(mod7)\\
+\end{aligned}$\\
+$\Rightarrow A\vdots 7\quad(3)$\\
+$\ast$បង្ហាញថា​$A\vdots p$\\
+តាមទ្រឹស្តីបទ​$Fermat$\\
+$-\underline{\begin{cases}
+3^p\equiv 3\\
+2^p\equiv 2
+\end{cases}}$\\
+$\Rightarrow 3^p-2^p\equiv 1\quad(modp)\\
+3^p-2^p-1\equiv 1\quad(modp)$\\
+នោះ$A\vdots p\qquad(4)$\\
+តាម$(1),(2),(3)$និង$(4)$គេបាន\\
+$A\vdots42p$\\
+\fbox{\so $3^p-2^p-1\vdots 42p$}
+\end{proof}
+\begin{exercise}
+ រកសំណល់នៃវិធីចែក$2008^{2018}$នឹង$13$។
+\end{exercise}
+\begin{proof}[\solution]
+ រកសំណល់នៃវិធីចែក$2008^{2018}$នឹង$13$\\
+ ដោយ$2008=13\times154+6$\\
+ $\begin{aligned}[t]
+ \Rightarrow 2008^{2018}&=(13\times 154+6)^{2018}\\
+ &\equiv 6^{2018}\quad(mod13)
+ \end{aligned}$\\
+ ដោយ$ gcd(6,13)=1$\\
+ តាបទ្រឹស្តីបទ$Fermat$គេបាន\\
+ $6^{12}\equiv 1\quad(mod13)$\\
+ យក​$2018$ចែកនឹង$12$\\
+ $2018=12\times 168+2$\\
+ $\begin{aligned}[t]
+ \Rightarrow 6^{2108}&=6^{12\times168+2}\equiv 6^2\quad(mod13)\\
+ &\equiv 36\equiv 10\quad(mod13)\\
+ \end{aligned}$\\
+ \fbox{\so សំណល់នៃវិធីចែក$2008^{2018}$នឹង$13$គឺ$10$}
+\end{proof}
+\begin{exercise}
+រកសំណល់នៃវិធីចែក${3^{{2^{2018}}}}$នឹង$11$ដោយ$gcd(3,11)=1$។
+\end{exercise}
+\begin{proof}[\solution]
+រកសំណល់នៃវិធីចែក${3^{{2^{2018}}}}$នឹង$11$\\
+ដោយ​$gcd(3,11)=1$គេបានៈ\\
+$3^{10}\equiv 1\quad(mod11)$\\
+យក$2^{2018}$ចែកនឹង$10$\\
+$\begin{aligned}[t]
+2^{2018}&=2^{4\times 504+2}=\left(2^4\right)^{504}\times 2^2=(10+6)^{504}\times 4\\
+&\equiv 6^{504}\times 4\quad(mod10)
+ \;
+ \begin{tikzpicture}
+ \node [rectangle callout,draw=orange!70,fill=orange!70,callout absolute pointer={(0,1)}
+] at (5,1) {$6^k$ចែកនឹង$10$បានសំណល់$6$};
+ \end{tikzpicture}\\
+&\equiv 6\times 4\equiv 24\equiv 4\quad(mod10)
+\end{aligned}$\\
+$\Rightarrow 2^{2018}=10k+4$\\
+$\begin{aligned}[t]
+\text{នោះគេបាន}3^{2^{2018}}&=3^{10k+4}\\
+&\equiv 3^4\equiv 81\quad(mod11)\end{aligned}$\\
+$3^{2^{2018}}\equiv 4\quad(mod11)
+$\\
+\fbox{\so សំណល់នៃវិធីចែក$3^{2^{2018}}$នឹង$11$គឺ$4$}
+\end{proof}
+\begin{exercise}
+ រកសំណល់នៃវិធីចែក$4362^{4362}$ ចែកនឹង$11$។
+\end{exercise}
+\begin{proof}[\solution]
+ រកសំណល់នៃវិធីចែក$4362^{4362}$ ចែកនឹង$11$\\
+ គេបាន$4362=11\times 396+6$\\
+ $\begin{aligned}[t]
+ \Rightarrow 4362^{43762}&=(11\times396+6)^{4362}\\
+ &\equiv 6^{4362}\quad(mod11)
+ \end{aligned}$\\
+ ដោយ$gcd(6,11)=1$\\
+ តាបទ្រឹស្តីបទ$Fermat$\\
+$6^{10}\equiv 1\quad(mod11)$\\
+យក$54362$ចែកនឹង$10$គេបានៈ\\
+$\begin{aligned}[t]
+4362&=10\times 436+2\\
+&\equiv 2\quad(mod10)\\
+\end{aligned}$\\
+$\Rightarrow 4362=10t+2$\\
+$\begin{aligned}[t]
+\text{នាំឱ្យ}\;6^{4362}&=6^{10t+2}=6^{10t}\cdot 6^2\\
+&\equiv 36\equiv 3\quad(mod13)
+\end{aligned}$\\
+\fbox{\so សំណល់នៃវិធីចែក$4362^{4362}$នឹង$11$គឺ$3$}
+\end{proof}
+\begin{exercise}
+ រកចំនួនគត់មានលេខពីរខ្ទង់ដែលពេលចែកនឹង$5$មានសំណល់$2$ចែកនឹង$9$មានសំណល់$7$។
+\end{exercise}
+\begin{proof}[\solution]
+ រកចំនួនគត់មានលេខពីរខ្ទង់\\
+ តាង$N$ជាចំនួនមានលេខពីរខ្ទង់\\
+ $\begin{aligned}[t]
+ \text{ដោយ}& N\equiv 2\quad(mod5)\\
+ &N\equiv 9\quad(mod 7)
+ \end{aligned}$\\
+ តាង​$N=r_o\quad(mod 9\times 5)$\\
+ យក$r_o=9t+7\quad , t=0,1,2,3,4$\\
+ មានតែ$t=0\Rightarrow r_o=7\equiv 7\quad(mod 5)$\\
+ $\Rightarrow N\equiv 7\quad(mod 45)\\
+ \Leftrightarrow N\equiv 45\times k+7$\\
+ $\divideontimes$បើ​ $k=1\\
+ \Rightarrow N=45\times 1+7=52$
+  \;
+ \begin{tikzpicture}
+ \node [rectangle callout,draw=black,text=black ,callout absolute pointer={(0,1)}
+] at (5,1) {52ចែកនឹង5សំណល់2ហើយចែកនឹង9សំណល់7};
+  \end{tikzpicture}\\
+ $\divideontimes$បើ$k=2\\
+ \Rightarrow N=45\times 2+7=97$
+ \;
+ \begin{tikzpicture}
+ \node [rectangle callout,draw=black,text=black,callout absolute pointer={(0,-0.5)}
+] at (5,1) {97ចែកនឹង5សំណល់2ហើយចែកនឹង9សំណល់7};
+ \end{tikzpicture}\\
+ \fbox{\so ចំនួនមានលេខពីរខ្ទង់គឺ$57$និង$97$}
+\end{proof}
+\begin{exercise}
+ រកសំណល់នៃវិធីចែក$2^{2017}$នឹង$35$។
+\end{exercise}
+\begin{proof}[\solution]
+ រកសំណល់នៃវិធីចែក$2^{2017}$នឹង$35$\\
+ ដោយ$35=5\times7\\
+ gcd(5,7)=1$\\
+ $\begin{aligned}[t]
+ \text{គេបាន} 2^{2017}&=2^{2016}\cdot 2=\left(2^2\right)^{1008}\cdot 2 =4^{1008}\cdot 2=(5-1)^{1008}\cdot 2\\
+ &\equiv 2\quad(mod5)
+ \end{aligned}$\\
+ $\begin{aligned}[t]
+ 2^{2017}&=\left(2^3\right)^{672}\cdot2=(7+1)^{672}\cdot2\\
+ &\equiv 2\quad(mod7)
+ \end{aligned}$\\
+ \fbox{\so សំណល់នៃវិធីចែក$2^{2017}$នឹង$35$គឺ$2$}
+\end{proof}
+\begin{exercise}
+ រកសំណល់នៃវិធីចែក$3^{2^{4n+1}}$ចែកនឹង$65$។
+\end{exercise}
+\begin{proof}[\solution]
+ រកសំណល់នៃវិធីចែក$3^{2^{4n+1}}$ចែកនឹង$65$\\
+ ដោយ​\;$55=5\times 11$\\
+ ដែល\;$gcd(3,5)=1\quad ,gcd(3,11)=1$
+ តាមទ្រឹស្តីបទ$Fermat$\\
+ $\begin{cases}
+ 3^4\equiv 1\quad(mod5)\\
+ 3^{10}\equiv 1\quad(mod11)
+ \end{cases}$\\
+ យក$2^{4n+1}$ចែកនឹង$4$គេបានៈ\\
+ $\begin{aligned}[t]
+ 2^{4n+1}&=2\left(2^2\right)^{2n}\\
+ &\equiv 0\quad(mod4)
+ \end{aligned}$\\
+ យក$2^{4n+1}$ចែកនឹង$10$គេបានៈ\\
+ $2^{4n+1}=\left(2^4\right)^{n}\cdot2=(11+6)^n\cdot2$\\
+ $\begin{aligned}[t]
+ 2^{4n+1}&\equiv 6^n\cdot2\quad(mod10)\\
+ &\equiv 6\times 2\equiv 2\quad(mod10)
+\end{aligned}$\\
+$\Rightarrow\begin{cases} 2^{4n+1}=4k\\
+ 2^{4n+1}=10k+2
+ \end{cases}$\\
+ គេបាន\\
+$3^{2^{4n+1}}=3^{4k}\equiv 1\quad(mod5)$\\
+ម្យ៉ាងទៀត\\
+$\begin{aligned}[t]
+3^{2^{4n+1}}&=3^{10k+2}=9\cdot 3^{10k}\\
+&\equiv 9\quad(mod11)
+\end{aligned}$\\
+តាង$3^{2^{4n+1}}=r_o$\\
+យក​\;$r_o=11t+9\quad ,t=0,1,2,3,4$\\
+$\begin{aligned}[t]
+\text{មានតែ}t=2\Rightarrow r_o&=11\times 2+9\\
+&=31\equiv 1\quad(mod5)
+\end{aligned}$\\
+\fbox{\so សំណល់នៃវិធីចែក$3^{2^{4n+1}}$នឹង$55$គឺ$31$}
+\end{proof}
+\begin{exercise}
+ រកសំណល់នៃវិធីចែក
+\begin{enumerate}[a]
+\item $3^{100}$នឹង$25$
+\item $2^{2007}$នឹង$49$។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+រកសំណល់នៃវិធីចែក
+\begin{enumerate}[a]
+\item $3^{100}$នឹង$25$\\
+យើងមាន$p^2=25\Rightarrow p=5$\\
+$p(p-1)=5\times 4=20$\\
+ដោយ$gcd(3,5)=1\\
+\Rightarrow 3^{20}\equiv 1\quad(mod5^2)$\\
+នោះ$3^{1000}=3^{20\times 5}\equiv 1\quad(mod25)$\\
+\fbox{\so សំណល់នៃវិធីចែក$3^{1000}$នឹង$25$គឺ$1$}
+\item $2^{2007}$នឹង$49$\\
+យើងមាន$p^2=49\Rightarrow p=7\\
+\Rightarrow p(p-1)=7\times 6=42$
+ដោយ$gcd(2,7)=1\\
+\Rightarrow 2^{42}\equiv 1\quad (mod7^2)$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; &2^{2007}=2^{42\times 47+33}
+=2^{42\times 47}\cdot 2^{33}\\
+&\equiv 2^{33}\equiv \left(2^3\right)^{11}\quad\left( mod7^2\right)\\
+&\equiv (7+1)^{11}\equiv 11\times 7+1\quad\left( mod7^2\right)
+\;
+ \begin{tikzpicture}
+ \node [rectangle callout,draw=yellow!70,fill=yellow!70,callout absolute pointer={(0,1)}
+] at (5,1) {\kml រូបមន្ត\;$(a+b)^n\equiv nab^{n-1}+b^n\quad\left( mod a^2\right)$};
+ \end{tikzpicture}\\
+&\equiv 78\equiv 49+29\quad\left( mod7^2\right)\\
+&\equiv 29\quad\left( mod7^2\right)\end{aligned}$\\
+\fbox{\so សំណល់នៃវិធីចែក$2^{2007}$នឹង$49$គឺ$29$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ រកសំណល់នៃវិធីចែក
+\begin{enumerate}[a]
+\item $3^{4^{15}}$នឹង$121$
+\item $15^{15^{15}}$នឹង$49$។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+ រកសំណល់នៃវិធីចែក
+ \begin{enumerate}[a]
+ \item $3^{4^{15}}$នឹង$121$\\
+ ដោយ$p^2=121\Rightarrow p=11\\
+ p(p-1)=11\times 10=110\\
+ \text{ដោយ}\; gcd(3,11)=1$\\
+ យក$4^{15}$ចែកនឹង$11$\\
+ $\begin{aligned}[t]
+ \text{គេបាន}\; 4^{15}&=2^{30}=\left(2^{5}\right)^6=32^6=(33-1)^6\\
+ &\equiv 1\quad(mod11)
+\end{aligned} $\\
+យក$4^{15}$ចែកនឹង$10$\\
+$\begin{aligned}[t]
+\text{គេបាន}\;& 4^{15}=2^{30}=2^{4\times 7+2}
+&4^{15}\equiv 6\times 4\equiv 4\quad(mod10)\end{aligned}$\\
+តាង$4^{15}=r_o\quad(mod10\times 11)$\\
+យក$r_o=11t+1\quad , t=0,1,2,\cdots,9$\\
+$\begin{aligned}[t]
+\text{ឱ្យ}t=3\Rightarrow r_o&=34\\
+&\equiv 4\quad(mod10)
+\end{aligned}$\\
+គេបាន$4^{15}\equiv 34\quad(mod10\times 11)\\
+4^{15}=10\times 11k+34$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; 3^{4^{15}}&=3^{10\times11k+34}\\
+&\equiv 3^{34}\equiv \left(3^5\right)^6\cdot 3^4\quad(mod121)\\
+&\equiv (121\times 2+1)\times81\equiv 81\quad(mod121)\\
+\end{aligned}$\\
+\fbox{\so សំណល់នៃវិធីចែក$3^{4^{15}}$នឹង$121$គឺ$81$}
+\item $15^{15^{15}}$នឹង$49$\\
+គេបាន$p^2=49\Rightarrow p=7\\
+p(p-1)=7\times 6$\\
+ដោយ$gcd(15,7)=1$គេបាន\\
+$15^{7\times 6}\equiv 1\quad(mod7^2)$\\
+យក$15^{15}$ចែកនឹង$6$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; 15^{15}&=(12+3)^{15}\\
+&\equiv 3^{15}\equiv (3^3)^{5}\equiv (24+3)^5\quad(mod6)\\
+&\equiv 3^5\equiv 243\equiv (6\times 40+3)\equiv 3\quad(mod6)
+\end{aligned}$\\
+យក$15^{15}$ចែកនឹង$7$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; 15^{15}&=(14+1)^{15}\\
+&\equiv 1\quad(mod7)
+\end{aligned}$\\
+តាង$15^{15}=r_o$\\
+យក$r_o=7t+1\quad ,t=0,1,2,\cdots, 5$\\
+$\begin{aligned}[t]
+\text{ឱ្យ}t=2\Rightarrow r_o&=14+1=15\\
+&\equiv 3\quad(mod6)
+\end{aligned} $\\
+$15^{15}\equiv 15\quad(mod6\times 7)\\
+\Rightarrow 15^{15}=6\times7k+7$\\
+$\begin{aligned}[t]
+\text{នាំឱ្យ}15^{15^{15}}&=15^{6\times7k+7}=15^{6\times7k}\cdot15^7\\
+&\equiv 15^7\equiv 15^{14}\times 15\equiv (14+1)^{15}\times15\quad(mod49)\\
+&\equiv (7\times 2+1)^{15}\times15\equiv 1\times15\equiv 15\quad(mod49)
+\end{aligned}$\\
+\fbox{\so សំណល់នៃវីធីចែក$15^{15^{15}}$នឹង$49$គឺ$15$}
+ \end{enumerate}
+\end{proof}
+\begin{exercise}
+ រកសំណលក្នុងវិធីចែក
+\begin{enumerate}[a]
+\begin{multicols}{2}
+\item $6^{1991}$នឹង$28$
+\item $35^{150}$នឹង$425$
+\item $35^{12^{11}}$នឹង$325$
+\item $22^{2002}$នឹង$1001$។
+\end{multicols} 
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+រកសំណលក្នុងវិធីចែក
+\begin{enumerate}[a]
+\item $6^{1991}$នឹង$28$\\
+យើងមាន$m=28=2^2\times 7$\\
+$\begin{aligned}[t]
+\Rightarrow 6^{1991}&=(2\times3)^{1991}=2^{1991}\times3^{1991}\\
+&=2^2\times 2^{1989}\times 3^{1989}\times3^2
+&=2^2\times6^{1989}\times 9
+\end{aligned}$\\
+$\star$សម្រួល$2^2$រួចចែក$6^{1989}$នឹង$7$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; 6^{1989}\times 9&=(7-1)^{1989}\times 9=(7-1)^{1989}\times (7+2)\\
+&\equiv -2\equiv -7+5\equiv 5\quad(mod7)
+\end{aligned}$\\
+$\star$គុណអង្គទាំងពីេរនឹង$2^2$គេបាន\\
+$6^{1991}\equiv 20\quad(mod28)$\\
+\fbox{\so សំណល់នៃវិធីចែក$6^{1991}$នឹង$28$គឺ$20$}
+\item $35^{150}$នឹង$425$\\
+ដោយ​$m=425=5^2\times17$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; &35^{150}=7^{150}\times5^{150}=7^2\times7^{148}\times5^2\times5^{148}\\
+&=7^2\times35^{148}\times5^2=5^2\times 35^{148}\times49
+\end{aligned}$\\
+$\star$សម្រួល$5^2$រួចចែក$3^{148}\times 49$នឹង$17$\\
+$\begin{aligned}[t]
+\Rightarrow &35^{148}\times49=(34+1)^{148}\times(34+15)\\
+&\equiv 1\times15\equiv 15\quad(mod17)
+\end{aligned}$\\
+$\star$គុណអង្គទាំងពីរនឹង$5^2$គេបានៈ\\
+$35^{150}\equiv 15\times25\quad(mod425)\\
+3^{150}\equiv 375\qquad(mod425)$\\
+\fbox{\so សំណល់នៃវិធីចែក$35^{150}$នឹង$425$គឺ$375$}
+\item $35^{12^{11}}$នឹង$325$\\
+យើងមាន$m=325=5^2\times 13$\\
+$\begin{aligned}[t]
+35^{12^{11}}&=5^{12^{11}}\times7^{12^{11}}=5^2\times5^{12^{11}-2}\times7^{12^{11}-2}\times7^2\\
+&=35^{12^{11}-2}\times49
+\end{aligned}$\\
+$\star$សម្រួល$5^2$រួចចែក$35^{12^{11}-2}\times49$នឹង$13$\\
+$\begin{aligned}[t]
+\text{គេបាន}\;35^{12^{11}-2}\times49&=(13\times3-4)^{12^{11}-2}\times (13\times3+10)\\
+&\equiv 4^{12^{11}-1}\times10\quad(mod13)
+\end{aligned}$\\
+ដោយ$gcd(4,13)=1$\\
+តាមទ្រឹស្តីបទ$Fermat\\
+4^{12}\equiv 1\quad(mod13)$
+យក$12^{11}-2$ចែកនឹង$12$\\
+$\begin{aligned}[t]
+\text{គេបាន} 12^{11}-2&\equiv -2\quad(mod12)\\
+&\equiv 10\quad(mod12)
+\end{aligned}$\\
+$\Rightarrow 12^{11}-2=12k+10$\\
+$\begin{aligned}[t]
+\text{នាំឱ្យ}\; &4^{12^{11}-2}=4^{12k+10}\times 10\\
+&\equiv 4^{10}\times 10\equiv (4^3)^3\times 4\times 10\quad(mod13)\\
+&\equiv (64)^3\times 10\equiv (65-1)^3\times (39+1)\quad(mod13)\end{aligned}$\\
+$4^{12^{11}-2}\equiv -1\equiv 12\quad(mod13)
+$\\
+$\Rightarrow 35^{12^{11}-2}\times 49\equiv 12\quad(mod13)$\\
+គុណអង្គទាំងពីរនឹង$5^2$គេបាន\\
+$35^{12^{11}}\equiv 300\quad(mod325)$\\
+\fbox{\so សំណល់នៃវិធីចែក$35^{12^{11}}$នឹង$325$គឺ$300$}
+\item $22^{2002}$នឹង$1001$\\
+យើមាន $m=1001=7\times 11\times 13$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; 22^{2002}&=2^{2002}\times 11^{2002}\\
+&=2\times 2^{2001}\times 11\times 11^{2001}=2\times 22^{2001}\times 11
+\end{aligned}$\\
+$\ast$សម្រួល$11$រួចចែក$2\times 22^{2001}$នឹង$7\times 13$\\
+$\looparrowright$រកសំណល់នៃវិធីចែក$2\times 22^{2001}$នឹង$7$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; 2\times 22^{2001}&=2\times (21+1)^{2001}\\
+&\equiv 2\quad(mod7)
+\end{aligned}$\\
+$\looparrowright$រកសំណល់នៃវិធីចែក$2\times 22^{2001}$នឹង$13$\\
+$\begin{aligned}[t]
+\text{គេបាន}\;& 2\times 22^{2001}=2\times (26-4)^{2001}\\
+&\equiv -2\times 4^{2001}\equiv -2(2^3)^{667}\equiv -2(65-1)^{667}\equiv 2\quad(mod13)
+\end{aligned}$\\
+ដោយ$r_1=r_2=r_o=2$\\
+គេបាន $2\times 22^{2001}\equiv 2\quad(mod7\times 13)$\\
+$\ast$គុណអង្គទាំងពីរនឹង$11$វិញគេបាន\\
+$11\times 2\times 22^{2001}\equiv 22\quad(mod1001)\\
+22^{2002}\equiv 22\quad(mod1001)$\\
+\fbox{\so សំណល់នៃវិធីចែក$22^{2002}$នឹង$1001$គឺ$22$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ រកសំណល់នៃ$3^{2019}$ចែកនឹង$35$។
+\end{exercise}
+\begin{proof}[\solution]
+ រកសំណល់នៃ$3^{2019}$ចែកនឹង$35$\\
+ ដោយ $35=7\times 5\quad , gcd(7,5)=1$\\
+$\looparrowright$ រកសំណល់នៃវិធីចែក$3^{2019}$នឹង$5$\\
+ $\begin{aligned}[t]
+ \text{គេបាន}\; 3^{2019}&=(3^2)^{1009}\times3=(10-1)^{1009}\times 3\\
+ &\equiv -3\equiv -5+2\equiv 2\quad(mod5) 
+ \end{aligned}$\\
+ $\looparrowright$ រកសំណល់នៃវិធីចែក$3^{2019}$នឹង$7$\\
+ $\begin{aligned}[t]
+ \text{គេបាន}\; 3^{2019}&=(3^3)^{673}=(27)^{673}=(28-1)^{673}\\
+ &\equiv -1\equiv -7+6\equiv 6\quad(mod7)
+ \end{aligned}$\\
+ $\Rightarrow 3^{2019}=r_o$\\
+ ដែល$r_o=7k+6\quad ,k=0,1,2,3,4$\\
+ $\begin{aligned}[t]
+ \text{យក}k=3\Rightarrow r_o&=7\times 3+6\\
+ &=27\equiv 2\quad(mod5)
+ \end{aligned}$\\
+ $\Rightarrow 3^{2019}\equiv 27\quad(mod35)$\\
+ \fbox{\so សំណល់នៃចែក$3^{2019}$នឹង$35$គឺ$27$}
+\end{proof}
+\begin{exercise}
+រកសំណល់នៃ$3^{2018}$ចែកនឹង$49$។
+\end{exercise}
+\begin{proof}[\solution]
+សំណល់នៃ$3^{2018}$ចែកនឹង$49$\\
+យើងមាន$p^2=49\Rightarrow p=7\\
+p(p-1)=7(7-1)=7\times 6\\
+\Rightarrow 3^{7\times 6}=3^{42}\equiv 1\quad(mod49)$\\
+គេបាន$3^{2018}=3^{7\times 6+2}\equiv 3^2\quad(mod49)$\\
+\fbox{\so សំណល់នៃវិធីចែក$3^{2018}$នឹង$49$គឺ$9$}
+\end{proof}
+\begin{exercise}
+ដោយប្រើទ្រឹស្តីបទ$Euler$រកសំណល់នៃវិធីចែក$3^{2019}$នឹង$28$។
+\end{exercise}
+\begin{proof}[\solution]
+រកសំណល់នៃវិធីចែក$3^{2019}$នឹង$28$\\
+ដោយ​$28=7\times 4=2^2\times 7$\\
+$\begin{aligned}[t]
+\text{រក}\varphi(28)&=28\left(1-\frac{1}{2}\right)\\
+&=28\left(\frac{1}{2}\right)\left(\frac{6}{7}\right)=12
+\end{aligned}$\\
+តាមទ្រឹស្តីបទ {\en Euler}\\
+$gcd(3,28)=1\\
+3^{\varphi(28)}=3^{12}\equiv 1\quad(mod28)$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; 3^{2019}&=3^{12\times 68+3}\\
+&\equiv 3^3\equiv 27\quad(mod28)
+\end{aligned}$\\
+\fbox{\so សំណល់នៃវិធីចែក$3^{2019}$នឹង$28$គឺ$27$}
+\end{proof}
+\begin{exercise}
+ដោយប្រើទ្រឹស្តីបទ{\en Euler}រកសំណល់ក្នុងវិធីចែក
+\begin{enumerate}[a]
+\item $109^{345}$នឹង$14$
+\item $5^{70}+7^{50}$ចែកនឹង$12$។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+រកសំណល់ក្នុងវិធីចែក
+\begin{enumerate}[a]
+\item $109^{345}$នឹង$14$\\
+$\begin{aligned}[t]
+\text{ដោយ}\; 109^{345}&=(14\times 7+11)^{345}\\
+&\equiv 11^{345}
+\end{aligned}$\\
+$\begin{aligned}[t]
+\text{រក}\; \varphi(14)&=\varphi(2)\times\varphi(7) \\
+&=(2-1)(7-1)=6
+\end{aligned}$\\
+$\ast$តាមអនុគមន៍{\en Euler}\\
+$gcd(11,14)=1\\
+\Rightarrow 11^{\varphi(14)}=11^6\equiv 1\quad(mod14)\\
+\text{គេបាន}\; 11^{6\times57+3}\equiv 11^3\quad(mod14)$\\
+$\looparrowright$ចែក$11^3$នឹង$14$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; 11^3&=(14-3)^{3}\\
+&\equiv -3^3\equiv -27\quad(mod14)\\
+&\equiv (-28+1)\equiv 1\quad(mod14)
+\end{aligned}$\\
+\fbox{\so សំណល់នៃវិធីចែក$109^{345}$នឹង$14$គឺ$1$}
+\item $5^{70}+7^{50}$ចែកនឹង$12$\\
+ដោយ$m=12=2^2\times3$\\
+$\begin{aligned}[t]
+\text{រក}\;\varphi(12)&=12\left(1-\frac{1}{2}\right)\left(1-\frac{1}{3}\right) \\
+&=12\times \frac{1}{2}\times\frac{2}{3}=4
+\end{aligned}$\\
+$\ast$តាមទ្រឹស្តីបទ{\en Euler}\\
+$gcd(5,12)=1\Rightarrow 5^{\varphi(12)}=5^4\equiv 1\quad(mod12)\\
+gcd(7,12)=1\Rightarrow 7^{\varphi(12)}=7^4\equiv 1\quad(mod12)$\\
+$\looparrowright$យក$5^{70}$និង$7^{50}$ចែកនឹង$12$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; 5^{70}&=5^{4\times12+2}\\
+&\equiv 25\equiv (12\times2+1)\equiv 1\quad(mod12)
+\end{aligned}$\\
+$\begin{aligned}[t]
+\text{ម្យ៉ាងទៀត}\; 7^{50}&=7^{4\times12+2}\\
+&\equiv 7^2\equiv 49\equiv(12\times4+1)\equiv 1\quad(mod12)
+\end{aligned}$\\
+$\Rightarrow 5^{70}+7^{50}\equiv 1+1\equiv 2\quad(mod12)$\\
+\fbox{\so សំណល់នៃវិធីចែក$5^{70}+7^{50}$គឺ$2$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ដោយប្រើទ្រឹស្តីបទ{\en Euler}រកសំណល់នៃវិធីចែក
+\begin{enumerate}[a]
+\item $2008^{2008}$នឹង$35$
+\item $11^{11^{11}}$នឹង$30$។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+រកសំណល់នៃវិធីចែក
+\begin{enumerate}[a]
+\item $2008^{2008}$នឹង$35$\\
+យើងមាន$m=35=5\times7$\\
+$\begin{aligned}[t]
+\text{រក}\; \varphi(35)&=35\left(1-\frac{1}{5}\right)\left(1-\frac{1}{7}\right)\\
+&=35\left(\frac{4}{5}\right)\left(\frac{6}{7}\right)=24
+\end{aligned}$\\
+$\begin{aligned}[t]
+\text{ដោយ}\; 2008^{2008}&=(35\times57+13)^{2008}\\
+&\equiv 13^{2008}\quad(mod35)
+\end{aligned}$\\
+$\ast$តាមទ្រឹស្តីបទ{\en Euler}\\
+ដោយ$gcd(13,35)=1\\
+\Rightarrow 13^{\varphi(35)}=13^{24}\equiv 1\quad(mod35)$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; &13^{2008}=13^{24\times83+16}\\
+&\equiv 13^{16}\equiv (35\times4+29)^8\equiv 29^8\quad(mod35)\\
+&\equiv (35-6)^8\equiv 6^8\quad(mod35)\end{aligned}$\\
+$13^{2008}\equiv \left(6^2\right)^4\equiv (35+1)^4\equiv 1\quad(mod35)
+$\\
+\fbox{\so សំណល់នៃវិធីចែក$2008^{2008}$នឹង$35$គឺ$1$}
+\item $11^{11^{11}}$នឹង$30$\\
+យើងមាន$m=30=2\times3\times5$\\
+$\begin{aligned}[t]
+\text{រក}\varphi(30)&=\varphi(2)\times\varphi(3)\times\varphi(5)\\
+&=(2-1)(3-1)(5-1)=8
+\end{aligned}$\\
+$\ast$តាមទ្រឹស្តីបទ{\en Euler}\\
+ដោយ$gcd(11,30)=1\\
+11^{\varphi}=11^8\equiv 1\quad(mod30)$\\
+$\looparrowright$យក$11^{11}$ចែកនឹង$8$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; 11^{11}&=(8+3)^{11}\\
+&\equiv 3^{11}\equiv (3^2)^5\times3\equiv 3\quad(mod8)
+\end{aligned}$\\
+$\Rightarrow 11^{11}=8k+3$\\
+$\begin{aligned}[t]
+\text{នោះ}\; 11^{11^{11}}&=11^{8k+3}=11^{8k}\cdot11^3\\
+&\equiv 11^3\equiv 121\times11\quad(mod30)\\
+&\equiv (120+1)\times11\equiv 11\quad(mod30)
+\end{aligned}$\\
+\fbox{\so សំណល់នៃវិធីចែក$11^{11^{11}}$នឹង$30$គឺ$11$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ដោយប្រើ{\en Euler}រកសំណល់នៃវិធីចែក
+\begin{enumerate}[a]
+\item $3\times 5^{70}+4\times 7^{100}$នឹង$132$
+\item $5^{70}+7^{50}$នឹង$12$។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+រកសំណល់នៃវិធីចែក
+\begin{enumerate}[a]
+\item $3\times 5^{70}+4\times 7^{100}$នឹង$132$\\
+$\begin{aligned}[t]
+\text{រក}\varphi(132)&=\varphi(12\times11)\\
+&=\varphi(2^2-1)\times\varphi(3)\times\varphi(11)\\
+&=(2^2-2^1)(3-1)(11-1)=40
+\end{aligned}$\\
+តាមទ្រឹស្តីបទ{\en Euler}\\
+$\begin{cases}
+gcd(5,132)=1\Rightarrow5^{\varphi(132)}=5^{40}\equiv 1\quad(mod132)\\
+gcd(7,132)=1\Rightarrow7^{\varphi(132)}=7^{132}\equiv 1\quad(mod132)\end{cases}\\
+\begin{aligned}[t]
+\Rightarrow&3\times5^{75}+4\times7^{100}=3\times5^{40+35}+4\times7^{2\times40+20}\\
+&\equiv 3\times5^{35}+4\times7^{20}\quad(mod132)\end{aligned}$\\
+$
+\text{ដោយ}\; 5^{35}=(5^3)^{11}\times5^2=(132-7)^{11}\times5^2\\
+\equiv -7^{11}\times5^2\equiv -(7^4)^2\times7^3\times25\quad(mod132)\\
+\equiv -(132\times18+25)^2\times7^3\times 25\quad(mod132)\\
+\equiv -(25)^2\times343\times25\equiv -43\quad(mod132)\\
+\Rightarrow 3\times5^{35}\equiv -129\equiv -132+3\equiv 3\quad(mod132)
+$\\
+$\begin{aligned}
+\text{ម្យ៉ាងទៀត}7^{20}&=(7^4)^5=(132\times18+25)^5\\
+&\equiv 25^5\equiv 25(25)^4\equiv 25(132\times4+97)^2\quad(mod132)\\
+&\equiv 25\times97^2\equiv 25(132-35)^2\quad(mod132)\\
+&\equiv 25\times35^2\equiv (132\times232+1)\equiv 1\quad(mod132)
+\end{aligned}$\\
+$\text{គេបាន}\; 3\times5^{75}+4\times7^{100}\equiv 3+1\times4
+\equiv 7\quad(mod132)$\\
+\fbox{\so សំណល់នៃវិធីចែក $3\times 5^{70}+4\times 7^{100}$នឹង$132$គឺ$7$}
+\item $5^{70}+7^{50}$នឹង$12$
+$5^{70}+7^{50}$នឹង$12$\\
+យើងមាន$m=12=2^2\times3$\\
+$\text{រក}\; \varphi(12)=12\left(1-\frac{1}{2}\right)\left(1-\frac{1}{3}\right)=12\times \frac{1}{2}\times\frac{2}{3}$\\
+$\Rightarrow \varphi(12)=4$\\
+$\ast$តាមទ្រឹស្តីបទ{\en Euler}\\
+$\begin{cases}
+gcd(5,12)=1\Rightarrow5^{\varphi(12)}=5^4\equiv 1\quad(mod12)\\
+gcd(7,12)=1\Rightarrow7^{\varphi(12)}=7^4\equiv 1\quad(mod12)
+\end{cases}$\\
+$\begin{aligned}[t]
+\Rightarrow 5^{70}&=5^{4\times17+2}\\
+&\equiv5^2\equiv (12\times2+1)\equiv1\quad(mod12) 
+\end{aligned}$\\
+$\begin{aligned}7^{50}&=7^{4\times12+2}\\
+&\equiv 7^2\equiv (12\times4+1)\equiv 1\quad(mod12)
+\end{aligned}$\\
+$\Rightarrow 5^{70}+7^{50}\equiv 1+1\equiv 2\quad(mod12)$\\
+\fbox{\so សំណល់នៃវិធីចែក $5^{70}+7^{50}$នឹង$12$គឺ$2$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ ស្រាយថា$0.3(2003^{2017}-2007^{2019})$ជាចំនួនគត់។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយថា$0.3(2003^{2017}-2007^{2019})$ជាចំនួនគត់\\
+$\begin{aligned}
+\text{តាង}\; A&=0.3\left(2003^{2017}-2007^{2019}\right)\\
+&=\frac{3}{10}\left(2003^{2017}-2007^{2019}\right)
+\end{aligned}$\\
+$\begin{aligned}
+\text{យើងមាន}\; &2003^{2017}=(2000+3)^{2017}\\
+&\equiv 3^{2017}\equiv 3^{4\times504+1}\equiv 3\quad(mod10)
+\end{aligned}$\\
+$\begin{aligned}
+\text{ម្យ៉ាងទៀត}\; &2007^{2019}=(2000+7)^{2019}\\
+&\equiv 7^{2019}\equiv 7^{4\times504+3}\equiv 7^3\quad(mod10)\\
+&\equiv 343\equiv 3\quad(mod10)
+\end{aligned}$\\
+$\Rightarrow 2003^{2017}-2007^{2019}\equiv 3-3\equiv 0\quad(mod10)$\\
+នាំឱ្យ$A$ជាចំនួនគត់\quad(ពិត)\\
+\fbox{\so $2003^{2017}-2007^{2019}$ជាចំនួនគត់}
+\end{proof}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថា$2^{3^{4n+1}}+3 \vdots 11, \forall n \in{\N}$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$2^{3^{4n+1}}+3 \vdots 11, \forall n \in{\N}$\\
+ដោយ$gcd(2,11)=1$\\
+តាមទ្រឹស្តីបទ{\en Fermat}\\
+$2^{10}\equiv1\quad(mod11)$\\
+យក$3^{4n+1}$ចែកនឹង$10$\\
+$\begin{aligned}
+\text{គេបាន}\; 3^{4n+1}&=3^{4n}\times3=81^n\times3\\
+&\equiv 3\quad(mod10)
+\end{aligned}$\\
+$\Rightarrow 3^{4n+1}=10k+3$\\
+$\begin{aligned}
+\text{គេបាន}\; &2^{3^{4n+1}}+3=2^{10k+3}+3=2^{10k}\times2^3+3\\
+&\equiv 11\equiv 0\quad(mod11)
+\end{aligned}$\\
+\fbox{\so $2^{3^{4n+1}}+3$ចែកដាច់នឹង$11$}
+\end{proof}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថា$9^{9^{9^{9^{9}}}}-9^{9^{9^{9}}} \vdots 10$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$9^{9^{9^{9^{9}}}}-9^{9^{9^{9}}} \vdots 10$\\
+យក$9^{9^{9^{9}}}$ចែកនឹង$4$គេបាន\\
+$\begin{aligned}
+9^{9^{9^{9}}}&=(8+1)^{9^{9^{9}}}\\
+&\equiv 1\quad(mod4)
+\end{aligned}$\\
+$\Rightarrow 9^{9^{9}}=4k+1$\\
+$\begin{aligned}
+\text{ដូចគ្នាដែរ}\;9^{9^{9}}&=(8+1)^{9^{9}}\\
+&\equiv 1\quad(mod4)
+\end{aligned}$\\
+$\Rightarrow 9^{9^{9}}=4t+1$\\
+$\begin{aligned}
+\text{គេបាន}\; &9^{9^{9^{9^{9}}}}-9^{9^{9^{9}}}=9^{4k+1}-9^{4t+1}=9^{4k}\cdot9-9^{4t}\cdot9\\
+&\equiv 9-9\equiv 0\quad(mod10)
+\end{aligned}$\\
+$\Rightarrow9^{9^{9^{9^{9}}}}-9^{9^{9^{9}}}\vdots10$\quad(ពិត)\\
+\fbox{\so $9^{9^{9^{9^{9}}}}-9^{9^{9^{9}}}$ចែកដាច់នឹង$10$}
+\end{proof}
+\begin{exercise}
+រកលេខមួយខ្ទង់ចុងក្រោយនៃ$3^{2^{1998}}-2^{9^{1998}}$។
+\end{exercise}
+\begin{proof}[\solution]
+រកលេខមួយខ្ទង់ចុងក្រោយនៃ$3^{2^{1998}}-2^{9^{1998}}$\\
+$\star$យក$2^{1998}$ចែកនឹង$4$គេបាន\\
+$2^{1998}=\left(2^2\right)^{999}\equiv 0\quad(mod4)\\
+\Rightarrow2^{1998}=4k\\
+\star\text{យក$2^{1998}$ចែកនឹង$4$គេបាន}\\
+9^{1998}=(8+1)^{1998}\equiv 1\quad(mod4)\\
+\Rightarrow9^{1998}=4t+1 $\\
+$\begin{aligned}
+\text{គេបាន}\; &3^{2^{1998}}-2^{9^{1998}}=3^{4k}-2^{4t+1}\\
+&\equiv 1-6\times2\equiv -11\equiv -20+9\quad(mod10)\\
+&\equiv 9\quad(mod10)
+\end{aligned}$\\
+\fbox{\so $3^{2^{1998}}-2^{9^{1998}}$មានលេខមួយខ្ទង់ចុងក្រោយគឺ$9$}
+\end{proof}
+\begin{exercise}
+ រកលេខមួយខ្ទងចុងក្រោយនៃផលចែកក្នុងវិធីចែក$3^{2^{1930}}+2^{9^{1945}}-19^{5^{1980}}$នឹង$7$។
+\end{exercise}
+\begin{proof}[\solution]
+រកលេខមួយខ្ទង់ចុងក្រោយនៃផលចែក\\
+តាង$A=3^{2^{1930}}+2^{9^{1945}}-19^{5^{1980}}$\\
+ដោយ$A\equiv 0\quad(mod7)$\\
+$\star$យក$2^{1930}$ចែកនឹង$4$គេបាន\\
+$2^{1930}\equiv 0\quad(mod10)\\
+\Rightarrow 2^{1930}=4k\quad ,k\in \R$\\
+$\star$យក$9^{1945}$ចែកនឹង$4$គេបាន\\
+$\begin{aligned}9^{1945}&=(8+1)^{1945}
+&\equiv 1\quad(mod4)
+\end{aligned}$\\
+$\Rightarrow 9^{1945}=4t+1$\\
+$\star$យក$5^{1980}$ចែកនឹង$4$គេបាន\\
+$5^{1980}=(4+1)^{1980}\equiv 1\quad(mod4)\\
+\Rightarrow5^{1980}=4y+1$\\
+$\star$យក$A$ចែកនឹង$10$\\
+$\begin{aligned}
+\text{គេបាន}\; A&=3^{4k}+2^{4t+1}-19^{4y+1}\equiv 1+6\times2-19\quad(mod10)\\
+&\equiv -6\equiv -10+4\equiv 4\quad(mod10)
+\end{aligned}$\\
+$\Rightarrow A=r_o\quad(mod70)$\\
+យក$r_o=10x+4\quad ,x=0,1,2,3,4,5,6$\\
+$\begin{aligned}
+\text{មានតែ}\; x=1\Rightarrow r_o&=14\\
+&\equiv 0\quad(mod7)
+\end{aligned}$\\
+$\Rightarrow A\equiv 14\quad(mod70)$
+\;
+ \begin{tikzpicture}
+ \node [rectangle callout,fill=yellow!70,text=black,callout absolute pointer={(0,1)}
+] at (5,1) {រកលេខមួយខ្ទង់ចុងក្រោយយើងចែកវានឹង$7$};
+  \end{tikzpicture}\\
+\fbox{\so លេខមួយខ្ទង់ចុងក្រោយនៃផលចែកគឺ$2$}
+\end{proof}
+\begin{exercise}
+រកលេខមួយខ្ទង់ចុងក្រោយនៃចំនួន$A=2017^{2018^{2019}}$។
+\end{exercise}
+\begin{proof}[\solution]
+រកលេខមួយខ្ទង់ចុងក្រោយនៃចំនួន$A=2017^{2018^{2019}}$\\
+$\begin{aligned}
+\text{គេបាន}\; A&=2017^{2018^{2019}}=(2010+7)^{2018^{2019}}\\
+&\equiv 7^{2018^{2019}}\quad(mod10)
+\end{aligned}$\\
+$\star$យក$2018^{2019}$ចែកនឹង$4$\\
+$\begin{aligned}
+\text{គេបាន}\; 2018^{2019}&=(2016+3)^{2019}\\
+&\equiv 2^{2019}\equiv 0\quad(mod4)
+\end{aligned}$\\
+$\Rightarrow 2018^{2019}=4k$\\
+$\begin{aligned}
+\text{នាំឱ្យ}\; A&\equiv 7^{2018^{2019}}\equiv 7^{4k}\\
+&\equiv 1\quad(mod10)
+\end{aligned}$\\
+\fbox{\so $2017^{2018^{2019}}$មានលេខមួយខ្ទង់ចុងក្រោយគឺ$1$}
+\end{proof}
+\begin{exercise}
+រកលេខពីរខ្ទង់ចុងក្រោយនៃ$14^{14^{14}}$។
+\end{exercise}
+%\begin{center}
+%\begin{tikzpicture}
+%\shade[top color=red, bottom color=white, shading angle={135}]
+%[draw=black,fill=red!20,rounded corners=1.2ex,very thick] (1.5,.5) -- ++(0,1) -- ++(1,0.3) --  ++(3,0) -- ++(1,0) -- ++(0,-1.3) -- (1.5,.5) -- cycle;
+%\draw[very thick, rounded corners=0.5ex,fill=black!20!blue!20!white,thick]  (2.5,1.8) -- ++(1,0.7) -- ++(1.6,0) -- ++(0.6,-0.7) -- (2.5,1.8);
+%\draw[thick]  (4.2,1.8) -- (4.2,2.5);
+%\draw[draw=black,fill=gray!50,thick] (2.75,.5) circle (.5);
+%\draw[draw=black,fill=gray!50,thick] (5.5,.5) circle (.5);
+%\draw[draw=black,fill=gray!80,semithick] (2.75,.5) circle (.4);
+%\draw[draw=black,fill=gray!80,semithick] (5.5,.5) circle (.4);
+%\draw[red,line width=3mm,semithick] (-.5,0) -- (8,0);
+%\end{tikzpicture}
+%\end{center}
+\begin{proof}[\solution]
+រកលេខពីរខ្ទង់ចុងក្រោយនៃ$14^{14^{14}}$\\
+$\star$យក$14^{14}$ចែកនឹង$20$\\
+$\begin{aligned}
+\text{គេបាន}\; 14^{14}&=\left(14^2\right)^{7}=(196)^7\\
+&=(200-4)^7\equiv -4^7\equiv -(2)^{14}\quad(mod20)\\
+&\equiv -\left(2^6\right)^2\times2^2\equiv -(64)^2\times4\quad(mod20)\\
+&\equiv -(60+4)^2\times4\equiv -16\times4\equiv -4\quad(mod20)\\
+&\equiv -20+16\equiv 16\quad(mod20)
+\end{aligned}$\\
+$\Rightarrow 14^{14}=20k+16 $\\
+$\star$យក$14^{14^{14}}$ចែកនឹង$100$\\
+$\begin{aligned}
+\text{គេបាន}\; 14^{14^{14}}&=14^{20k+16}=14^{20k}\cdot14^{16}\\
+&\equiv 76\left(14^2\right)^8\equiv 76(200-4)^8\quad(mod100)\\
+&\equiv 76\cdot4^8\equiv 76\cdot2^{16}\equiv 76\cdot2^{10}\cdot2^6\quad(mod100)\\
+&\equiv 76\cdot24\cdot64\equiv 76\cdot36\quad(mod100)\\
+&\equiv 36\quad(mod100)
+\end{aligned}$\\
+\fbox{\so លេខពីរខ្ទង់ចុងក្រោយនៃ$14^{14^{14}}$គឺ$36$}
+\end{proof}
+\begin{exercise}
+ រកលេខពីរខ្ទង់ចុងក្រោយនៃ$2^{9^{1997}}$។
+\end{exercise}
+\begin{proof}[\solution]
+ រកលេខពីរខ្ទង់ចុងក្រោយនៃ$2^{9^{1997}}$\\
+ $\star$យក$9^{1997}$ចែកនឹង$20$\\
+ $\begin{aligned}
+ \text{គេបាន}\; 9^{1997}&=\left(9^2\right)^{998}\times9=(80+1)^{998}\times9\\
+ &\equiv 9\quad(mod20)
+ \end{aligned}$\\
+ $\Rightarrow 9^{1997}=20k+9$\\
+ $\begin{aligned}
+ \text{នាំឱ្យ}\; 2^{9^{1097}}&=2^{20k+9}=2^{20k}\times2^9\\
+ &\equiv 76\times2^9\equiv 76(500+12)\equiv 76\times12\quad(mod100)\\
+ &\equiv (900+12)\equiv 12\quad(mod100)\\
+ \end{aligned}$\\
+ \fbox{\so លេខពីរខ្ទង់ចុងក្រោយនៃ$2^{9^{1997}}$គឺ$12$}
+\end{proof}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថា$9^{9^{9^{9}}}-9^{9^{9}}\vdots 100$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$9^{9^{9^{9}}}-9^{9^{9}}\vdots 100$\\
+$\begin{aligned}
+\text{ដោយ}\; 9^9&=\left(9^2\right)^4\times9=(80+1)^4\times9\\
+&\equiv 9\quad(mod20)
+\end{aligned}$\\
+$\Rightarrow 9^9=20k+9$\\
+$\begin{aligned}
+\text{នាំឱ្យ}\; 9^{9^{9}}&=9^{20k+9}=9^{20k}\times9^9\\
+&\equiv 1\times9^9\equiv (10-1)^{9}\quad(mod100)\\
+&\equiv (-1)^8\cdot9\cdot10\cdot1^8+(-1)\cdot1\quad(mod100)
+ \;
+ \begin{tikzpicture}
+ \node [rectangle callout,fill=red!30,text=black,callout absolute pointer={(0,1)}
+] at (5,1) {$(a-b)^n\equiv (-1)^{n-1}nab^{n-1}+(-1)^nb^n(moda^2)$};
+  \end{tikzpicture}\\
+&\equiv 89\quad(mod100)
+\end{aligned}$\\
+$\Rightarrow 9^{9^{9}}=100t+89$\\
+$\begin{aligned}
+\Leftrightarrow 9^{9^{9^{9}}}&=9^{100t+89}=9^{20(5k+4)+9}\\
+&\equiv 9^9\equiv 89\quad(mod100)
+\end{aligned}$\\
+$\Rightarrow 9^{9^{9^{9}}}-9^{9^{9}}\equiv 89-89\equiv 0\vdots100$\quad(ពិត)\\
+\fbox{\so $9^{9^{9^{9}}}-9^{9^{9}}\vdots100$}
+\end{proof}
+\begin{exercise}
+ រកលេខពីរខ្ទង់ចុងក្រោយនៃ$3^{2^{2008}}$។
+\end{exercise}
+\begin{proof}[\solution]
+ រកលេខពីរខ្ទង់ចុងក្រោយនៃ$3^{2^{2008}}$\\
+ $\star$យក$2^{2008}$ចែកនឹង$20$\\
+ $\begin{aligned}
+\text{គេបាន}\; 2^{2008}&=\left(2^2\right)^{1004}=4^{1003}\times4=4(5-1)^{1004}\equiv -4\quad(mod20)\\
+&\equiv -20+16\equiv 16\quad(mod20) 
+ \end{aligned}$\\
+ $\Rightarrow 2^{2008}=20x+16$\\
+ $\begin{aligned}
+ \text{គេបាន}\; 3^{2^{2008}}&=3^{20x+16}\equiv 1\times3^{36}\quad(mod100)\\
+ &\equiv \left(3^4\right)^4\equiv (100-19)^4\equiv 19^4\quad(mod100)\\
+ &\equiv \left(19^2\right)^2\equiv 61^2\equiv 21\quad(mod100)
+ \end{aligned}$\\
+ \fbox{\so លេខពីរខ្ទង់ចុងក្រោយនៃ$3^{2^{2008}}$គឺ$21$}
+\end{proof}
+\begin{exercise}
+ ស្រាយបញ្ជាក់ថា$7^{2^{4n+1}}+4^{3^{4n+1}}-65$ចែកដាច់នឹង$100$។
+\end{exercise}
+\begin{proof}[\solution]
+ ស្រាយបញ្ជាក់ថា$7^{2^{4n+1}}+4^{3^{4n+1}}-65$ចែកដាច់នឹង$100$\\
+ $\star$យក$2^{4n+1}$ចែកនឹង$20$\\
+ $\begin{aligned}
+ \text{គេបាន}\; 2^{4n+1}&=\left(2^4\right)^n\cdot2=2(4)^{2n}=2(5-1)^{2n}=2\times4(5-1)^{2n-1}\\
+ &\equiv -8\equiv -20+12\equiv 12\quad(mod20)
+ \end{aligned}$\\
+ $\Rightarrow2^{4n+1}=20k+12$\\
+ $\star$យក$3^{3n+1}$ចែកនឹង$20$\\
+ $\begin{aligned}
+\text{គេបាន}\; 3^{4n+1}&=3^{4n}\cdot3=(80+1)^{n}\cdot3\\
+ &\equiv 3\quad(mod20)
+ \end{aligned}$\\
+ $\Rightarrow 3^{4n+1}=20t+3$\\
+ $\begin{aligned}
+ \text{នាំឱ្យ}\; &7^{2^{4n+1}}+4^{3^{4n+1}}-65=7^{20k+12}+4^{20t+3}-65\\
+ &\equiv 7^{12}+4^{3}\cdot76-65\equiv\left(7^4\right)^3+76\times64-65\quad(mod100)\\
+ &\equiv (2400+1)^3+64-65\equiv 1-1\quad(mod100)\\
+ &\equiv 0\vdots100\quad\left(\text{ពិត}\right) 
+ \end{aligned}$\\
+ \fbox{\so ​$7^{2^{4n+1}}+4^{3^{4n+1}}-65\vdots100$}
+\end{proof}
+\begin{exercise}
+រកលេខបីខ្ទង់ចុងក្រោយនៃ
+\begin{enumerate}[a]
+\begin{multicols}{2}
+\item $2^{2008}$
+\item $3^{2018}$។
+\end{multicols}
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+រកលេខបីខ្ទង់ចុងក្រោយនៃ
+\begin{enumerate}[a]
+\item $2^{2008}$\\
+$\begin{aligned}
+\text{គេបាន}\; 2^{2008}&=2^{20\times100+8}\\
+&\equiv 376\times2^{8}\equiv 256\quad(mod10^3)
+\end{aligned}$\\
+\fbox{\so លេខបីខ្ទង់ចុងក្រោយនៃ$2^{2008}$គឺ$256$}
+\item $3^{2018}$\\
+$\begin{aligned}
+\text{គេបាន}\;&3^{2018}=3^{20\times1000+18}\\
+&\equiv 3^{18}\equiv \left(3^6\right)^3\equiv (729)^3\quad(mod1000)\\
+&\equiv (1000-271)^3\equiv -271^3\quad(mod1000)\\
+&\equiv -271(271)^2\equiv-271\times441\quad(mod1000)\\
+&\equiv -511\equiv (-1000+489)\equiv 489\quad(mod1000)
+\end{aligned}$\\
+\fbox{\so លេខបីខ្ទង់ចុងក្រោយនៃ$3^{2018}$គឺ$489$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ រកលេខបីខ្ទង់ចុងក្រោយនៃ
+\begin{enumerate}[a]
+\begin{multicols}{2}
+\item $2^{9^{2001}}$
+\item $14^{14^{14}}$
+\item $3^{2^{2007}}$
+\item $17^{5^{123}}$។
+\end{multicols}
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+ រកលេខបីខ្ទង់ចុងក្រោយនៃ
+\begin{enumerate}[a]
+\item $2^{9^{2001}}$\\
+$\star$យក$9^{2001}$ចែកនឹង$100$\\
+$\begin{aligned}
+\text{គេបាន}\; 9^{2001}&=9^{2000}\times9=(10-1)^{2000}\times9\\
+&\equiv 1\times9\equiv 9\quad(mod100)
+\end{aligned}$\\
+$\looparrowright9^{2001}=100k+9$\\
+$\begin{aligned}
+\Rightarrow 2^{9^{2001}}&=2^{100k+9}\equiv 2^9\times376\quad(mod1000)\\
+&\equiv 512\times376\equiv 512\quad(mod1000)
+\end{aligned}$\\
+\fbox{\so លេខបីខ្ទង់ចុងក្រោយនៃ$2^{9^{2001}}$គឺ$512$}
+\item$14^{14^{14}}$\\
+$\star$យក$14^{14}$ចែកនឹង$100$\\
+$\begin{aligned}
+\text{គេបាន}\; 14^{14}&=\left(14^2\right)^7=(200-4)^7\\
+&\equiv -4^7\equiv -2^{14}\equiv -2^{10}\times2^4\quad(mod100)\\
+&\equiv -(1000+24)\times16\equiv -24\times16\quad(mod100)\\
+&\equiv -384\equiv -400+16\equiv 16\quad(mod100)
+\end{aligned}$\\
+$\Rightarrow 14^{14}=100t+16$\\
+$\begin{aligned}
+\text{គេបាន}\; 14^{14^{14}}&=14^{100t+16}\\
+&\equiv 376\times14^6\equiv 376\cdot2^{16}\cdot7^{16}\quad(mod1000)\\
+&\equiv 376\cdot2^{10}\cdot2^6\cdot\left(7^4\right)^4\equiv 376\times1024\times64\times(2401)^4\quad(mod1000)\\
+&\equiv 376\times24\times64\times401^4\equiv 376\times1536\times801^2\quad(mod1000)\\
+&\equiv 376\times536\times601\equiv 376\times136\quad(mod1000)\\
+&\equiv 136\quad(mod1000)
+\end{aligned}$\\
+\fbox{\so លេខបីខ្ទង់ចុងក្រោយនៃ$14^{14^{14}}$គឺ$136$}
+\item $3^{2^{2007}}$\\
+$\star$យក$2^{2007}$ចែកនឹង$100$\\
+$\begin{aligned}
+\text{គេបាន}\; 2^{2007}&=2^7\cdot2^{2000}=2^7\left(2^{10}\right)^{200}\\
+&=2^7(1000+24)^{200}=(100+28)(1000+24)^{200}\\
+&\equiv 28\times24^{200}\equiv 28\left(24^2\right)^{100}\quad(mod100)\\
+&\equiv 28(500+66)^{100}\equiv 28\times66^{100}\quad(mod100)\\
+&\equiv 28\times4056^{50}\equiv 28\times56^{50}\quad(mod100)\\
+&\equiv 28\times36^{25}\equiv 28\times36\times96^{12}\quad(mod100)\\
+&\equiv 28\times36(100-4)^{12}\equiv 28\times36\times4^{12}\quad(mod100)\\
+&\equiv 8\times56^{3}\equiv 8\times16\equiv 28\quad(mod100)
+\end{aligned}$\\
+$\Rightarrow2^{2007}=100k+28$\\
+$\begin{aligned}
+\text{នាំឱ្យ}\; 3^{2^{2007}}&=3^{100k+28}\equiv 3^{28}\equiv \left(3^7\right)^{4}\quad(mod1000)\\
+&\equiv 187^{4}\equiv 969^2\equiv 961\quad(mod1000)
+\end{aligned}$\\
+\fbox{\so លេខបីខ្ទង់ចុងក្រោយនៃ$3^{2^{2007}}$គឺ$961$}
+\item $17^{5^{123}}$\\
+$\star$យក$5^{123}$ចែកនឹង$100$\\
+$\begin{aligned}
+\text{គេបាន}\; 5^{123}&=\left(5^3\right)^{41}=(100+25)^{41}\\
+&\equiv 25^{41}\equiv 25\times\left(25^2\right)^{20}\quad(mod100)\\
+&\equiv 25\times25^{20}\equiv 25^{20+1}\equiv 5^{2\times20+2}\quad(mod100)\\
+&\equiv 25\times25\equiv 25\quad(mod100)
+\end{aligned}$\\
+$\Rightarrow 5^{123}=100t+25$\\
+$\begin{aligned}
+\text{នាំឱ្យ}\; 7^{5^{123}}&=7^{100t+25}\equiv7^{25}\quad(mod1000)\\
+&\equiv 807^5\equiv 807\times807^4\equiv 807\times249\quad(mod1000) \\
+&\equiv 943\quad(mod1000)
+\end{aligned}$\\
+\fbox{\so លេខបីខ្ទង់ចុងក្រោយនៃ$7^{5^{123}}$គឺ$943$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+រកពីរចំនួនគត់វិជ្ជមាន$a$និង$b$
+\begin{multicols}{2}
+\begin{enumerate}[a]
+\item ដោយស្គាល់$\begin{cases}
+	a+b=72\\gcd(a,b)=12
+\end{cases}$
+\item ដោយស្គាល់ $\begin{cases}
+ab=735\\lcm(a,b)=105
+\end{cases}$
+\end{enumerate}
+\end{multicols}
+\end{exercise}
+\begin{proof}[\solution]
+រកពីរចំនួនគត់វិជ្ជមាន$a$និង$b$
+\begin{enumerate}[a]
+\item ដោយស្គាល់$\begin{cases}
+	a+b=72\\gcd(a,b)=12
+\end{cases}$\\
+យើងមាន$gcd(a,b)=12$\\
+$\looparrowright$តាមនិយមន័យ\\$\begin{cases}12\mid a\\12\mid b\end{cases}
+ \Rightarrow\begin{cases}a=12a'\\b=12b'\end{cases}$\\
+លក្ខខណ្ឌ$gcd(a',b')=1$\\
+$\begin{aligned}
+\text{គេបាន}\; a+b&=12a'+12b'\\
+&=12(a'+b')
+\end{aligned}$\\
+$72=12(a'+b')\\
+a'+b'=\frac{72}{12}\\
+a'+b'=6$\\
+$\Rightarrow\begin{cases}a'+b'=6\\gcd(a',b')=1\end{cases}\\
+\Leftrightarrow (a',b')=(5,1),(1,5)$\\
+$\bullet$ករណី$\begin{cases} a'=5\\b'=1\end{cases}\Rightarrow\begin{cases}a=12\times5\\b=12\times1\end{cases}\Rightarrow\begin{cases}a=60\\b=12\end{cases}$\\
+$\bullet$ករណី$\begin{cases}a'=1\\b'=5\end{cases}\Rightarrow\begin{cases}a=12\times1\\b=12\times5\end{cases}\Rightarrow\begin{cases}a=12\\b=60\end{cases}$\\
+\fbox{\so ពីរចំនួនគត់$a,b$គឺ$(60,12),(12,60)$}
+\item ដោយស្គាល់ $\begin{cases}
+ab=735\\lcm(a,b)=105
+\end{cases}$\\
+$
+\text{យើងមាន}lcm(a,b)=105\text{ហើយ}
+ab=735
+$\\
+តាមនិយមន័យ$\begin{cases}105=a\times a'\\105=b\times b'\end{cases}$\\
+លក្ខខណ្ឌ$gcd(a',b')=1$\\
+$\begin{aligned}
+\text{គេបាន}&105^2=ab\times a'b'\\
+&105^2=735\times a'b'\\
+&a'b'=\frac{105^2}{735}
+\end{aligned}$\\
+ដោយ$gcd(a',b')=1\\
+\Rightarrow (a',b')=(3,5),(5,3)$\\
++ករណី$(a',b')=(3,5)\\
+\Rightarrow \begin{cases}a=\frac{15}{a'}\\b=\frac{105}{b'}\end{cases}\Rightarrow \begin{cases}a=\frac{105}{3}=35\\b=\frac{105}{5}=21\end{cases}$\\
++ករណី$(a',b')=(5,3)\\
+\Rightarrow \begin{cases}a=\frac{105}{5}=21\\
+b=\frac{105}{3}=35\end{cases}$\\
+\fbox{\so​ $(a,b)=(35,21),(21,35)$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+រក$n\in{\N}, n<100$ដែល$gcd(n,252)=7$។
+\end{exercise}
+\begin{proof}[\solution]
+រក$n\in \N,n<100$\\
+យើងមាន$gcd(n,252)=7$\\
+តាមនិយមន័យ$\begin{cases}
+n=7\times n'\\
+252=7\times36
+\end{cases}$\\
+ដែល$gcd(n',36)=1$\\
+$
+\text{ដោយ} n<100\\
+7\times n'<100\\
+n'<\frac{100}{14}\\
+n<14$\\
+$\Rightarrow n'=1,5,7,11,13$\\
+$\Leftrightarrow n=7,35,49,77,91$\\
+\fbox{\so $n=7,35,49,77,91$}
+\end{proof}
+\begin{exercise}
+ដោយដឹងថា$gcd(a,b)=1$រក$gcd(11a+2b,18a+5b)$។
+\end{exercise}
+\begin{proof}[\solution]
+រក$gcd(11a+2b,18a+5b)$\\
+យើងមាន$gcd(a,b)=1$\\
+តាង$gcd(11a+2b,18a+5b)=d$\\
+តាមនិយមន័យ$\begin{cases}
+d\mid 11a+2b\\
+d\mid 18a+5b
+\end{cases}$\\
+$\Rightarrow \begin{cases}
+d\mid 18(11a+2b)=18\times11a+36b\\
+d\mid 11(18a+5b)=11\times18+55b
+\end{cases}$\\
+$\Rightarrow d\mid(11\times18a+55b)-(11\times18a+36)\\
+\Leftrightarrow d\mid 19b\quad(1)$\\
+ម្យ៉ាងទៀត$\begin{cases}
+d\mid 55a+10b\\
+d\mid 36a+10b
+\end{cases}$\\
+$\Rightarrow d\mid 55a+10b-(36a+10b)\\
+\Leftrightarrow d\mid 19a\quad(2)$\\
+តាម$(1)$និង$(2)$គេបាន\\
+$d\mid gcd(19a,19b)\\
+d\mid 19gcd(a,b)\\
+d\mid 19\\
+\Rightarrow d=1,19$\\
+\fbox{\so $gcd(11a+2b,18a+5b)=19$}
+\end{proof}
+\begin{exercise}
+រកចំនួនគត់ធម្មជាតិ$a$និង$b$ដោយដឹងថា
+\begin{enumerate}[a]
+\item $a+b=432,gcd(a,b)=36$
+\item $a\times b=216,gcd(a,b)=6$
+\item $ab=288,gcd(a,b)=6$។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+រកចំនួនគត់ធម្មជាតិ$a$និង$b$ដោយដឹងថា
+\begin{enumerate}[a]
+\item $a+b=432,gcd(a,b)=36$\\
+យើងមាន$gcd(a,b)=36\\
+a+b=432$\\
+តាមនិយមន័យ​ $\begin{cases}
+a=36a'\\
+b=36b'
+\end{cases}\text{ដែល} gcd(a',b')=1\\
+a+b=36(a'+b')\\
+432=36(a'+b')\\
+a'+b'=\frac{432}{36}=12\\
+\text{តែ}gcd(a',b')=1\\
+\Rightarrow (a',b')=(1,11),(5,7),(11,1),(7,5)\\
+\text{គេបាន}(a,b)=(36a',16b')\\
+\Rightarrow (a,b)=(36,396),(180,252),(396,36),(252,180)$\\
+\fbox{\so $(a,b)=(36,396),(180,252),(396,36),(252,180)$}
+\item $a\times b=216,gcd(a,b)=6$\\
+យើងមាន$gcd(a,b)=6$\\
+$\begin{cases}
+a=6\times a'\\
+b=6\times b'
+\end{cases}\text{លក្ខខ័ណ្ឌ}gcd(a',b')=1\\
+ab=36a'b'\\
+a'b'=\frac{216}{36}=6$\\
+ដោយ​$gcd(a',b')=1\\
+\Rightarrow (a',b')=(1,6),(6,1),(2,3),(3,2)\\
+\Leftrightarrow (a,b)=(6a',6b')=(6,36),(36,6),(12,18),(18,12)$\\
+\fbox{\so $(a,b)=(6,36),(36,6),(12,18),(18,12)$}
+\item $ab=288,gcd(a,b)=6$\\
+យើងមាន$gcd(a,b)=1\\
+\begin{cases}
+a=6a'\\
+b=6b'
+\end{cases}\text{ដែល​}gcd(a',b')=1\\
+ab=36a'b'\\
+288=36a'b'\\
+a'b'=\frac{288}{36}=8\\
+\text{ដោយ}gcd(a',b')=1\\
+\Rightarrow (a',b')=(1,8),(8,1)\\
+\Leftrightarrow (a,b)=(6a',6b')=(6,48),(48,6)$\\
+\fbox{\so  $(a,b)=(6a',6b')=(6,48),(48,6)$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+គេឱ្យប្រភាគសម្រួលមិនបាន$\dfrac{a}{b}$។ ស្រាយថាប្រភាគខាងក្រោមក៏សម្រួលមិនបានដែរ
+\begin{multicols}{3}
+\begin{enumerate}[a]
+\item $\dfrac{a-b}{ab}$
+\item $\dfrac{ab}{a^{2}+b^{2}}$
+\item $\dfrac{2a+b}{a(a+b)}$ ។
+\end{enumerate}
+\end{multicols}
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយថាប្រភាគខាងក្រោមជាប្រភាគសម្រួលមិនបាន
+\begin{enumerate}[a]
+\item $\dfrac{a-b}{ab}$\\
+តាង$gcd(a-b,ab)=d$\\
+តាមនិយមន័យ$\begin{cases}
+d\mid a-b\\
+d\mid ab
+\end{cases}\\
+\Rightarrow \begin{cases}
+d\mid ab-b^2\\
+d\mid ab
+\end{cases}\Leftrightarrow d\mid b^2\quad(1)$\\
+តែ$\begin{cases}
+d\mid a^2-ab\\
+d\mid ab
+\end{cases}\Rightarrow d\mid a^2\quad(2)$\\
+តាម$(1)$និង$(2)$គេបាន$d\mid gcd(a^2,b^2)$\\
+ដោយ$\frac{a}{b}$ជាប្រភាគសម្រួលមិនបាន$gcd(a,b)=1$\\
+$\Rightarrow gcd(a,b)=1\\
+\Rightarrow d\mid 1\\
+\Rightarrow d=1\\
+\Rightarrow gcd(a-b,ab)=1$\\
+\fbox{\so ប្រភាគ$\frac{ a-b}{ab}$ជាប្រភាគសម្រួលមិនបាន}
+\item $\dfrac{ab}{a^{2}+b^{2}}$\\
+តាង$gcd(ab,a^2+b^2)=d$\\
+គេបាន
+$\begin{cases}
+d\mid ab\\
+d\mid a^2+b^2
+\end{cases}\Rightarrow 
+\begin{cases}
+d\mid a^2b\\
+d\mid a^2b+b^3
+\end{cases}\Rightarrow d\mid b^3\quad(1)$\\
+ម្យ៉ាងទៀត$\begin{cases}
+d\mid ab^2\\
+d\mid a^3+ab^2
+\end{cases}\Rightarrow d\mid a^3\quad(2)$\\
+តាម$(1)$និង$(2)\; d\mid gcd(a^3,b^3)$\\
+ដោយ$\frac{a}{b}$ជាប្រភាគសម្រួលមិនបាន\\
+$gcd(a,b)=1\\
+\Rightarrow gcd(a^3,b^3)=1\\
+\Rightarrow d\mid 1\\
+\Rightarrow d=1\\
+\Rightarrow gcd(ab,a^2+b^2)=1$\\
+\fbox{\so ប្រភាគ$\frac{ab}{a^2+b^2}$ជាប្រភាគសម្រួលមិនបាន}
+\item $\dfrac{2a+b}{a(a+b)}$\\
+តាង$gcd(2a+b,a^2+ab)=d$\\
+តាមនិយមន័យ$\begin{cases}
+d\mid 2a+b\\
+d\mid a^2+ab
+\end{cases}\\
+\Rightarrow \begin{cases}
+d\mid 2a^2+ab\\
+d\mid 2a^2+2ab
+\end{cases}\\
+\Rightarrow d\mid 2a^2+ab-2a^2-2ab\\
+\Leftrightarrow d\mid ab\quad(1)$\\
+ម្យ៉ាងទៀត​$\begin{cases}
+d\mid 2a^2+ab\\
+d\mid a^2+ab
+\end{cases}\\
+\Rightarrow d\mid 2a^2+ab-a^2-ab\\
+\Rightarrow d\mid a^2\\
+\Leftrightarrow d\mid a\quad(2)$\\
+តាម$(1)$និង$(2)\; d\mid b\quad(3)$\\
+តាម$(2)$និង$(3)\; gcd(a,b)=1\\
+d\mid 1\\
+d=1\\
+\Rightarrow gcd(2a+b,a^2+ab)=1$\\
+\fbox{\so ប្រភាគ$\frac{ 2a+b}{a(a+b)}$ជាប្រភាគសម្រួលមិនបាន}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ ស្រាយបញ្ជាក់ថាប្រភាគខាងក្រោមសម្រួលមិនបានចំពោះគ្រប់ចំនួនគត់$n$
+\begin{multicols}{3}
+\begin{enumerate}[a]
+\item $\dfrac{12n+1}{30n+2}$
+\item $\dfrac{15n^{2}+8n+6}{30n^{2}+21n+13}$
+\item $\dfrac{n^{3}+2n}{n^{4}+3n^{2}+1}$ ។
+\end{enumerate}
+\end{multicols}
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថាប្រភាគខាងក្រោមសម្រួលមិនបានចំពោះគ្រប់ចំនួនគត់$n$
+\begin{enumerate}[a]
+\item  $\dfrac{12n+1}{30n+2}$\\
+តាង$gcd(30n+2,12n+2)d$\\
+យក$30n+2=(12n+1)\times2+6n\\
+12n+1=6n\times2+1\\
+6n=6n\times1+0\\
+\Rightarrow gcd(30n+2,12n)=1$\\
+\fbox{\so ប្រភាគ$\frac{12n+1}{30n+2}$ជាប្រភាគសម្រួលមិនបាន}
+\item  $\dfrac{15n^{2}+8n+6}{30n^{2}+21n+13}$\\
+រក$gcd(30n^2+21n+13,15n^2+8n+6)\\
+30n^2+21n+13=(15n^2+8n+6)2+5n+1\\
+15n^2+8n+6=(5n+1)(3n+1)+5\\
+5n+1=5\times n+1\\
+5n=5n\times1+0\\
+\Rightarrow gcd(30n^2+21n+13,15n^2+8n+6)=1$\\
+\fbox{\so ប្រភាគ$\frac{15n^2+8n+6}{30n^2+21n+13}$ជាប្រភាគសម្រួលមិនបាន}
+\item $\dfrac{n^{3}+2n}{n^{4}+3n^{2}+1}$\\
+រក$gcd(n^4+3n^2+1,n^3+2n)\\
+n^4+3n^2+1=(n^3+2n)n+n^2+1\\
+n^3+2n=(n^2+1)n+n\\
+n=n\times1+0\\
+\Rightarrow gcd(n^4+3n^2+1,n^3+2n)=1$\\
+\fbox{\so ប្រភាគ$\dfrac{15n^{2}+8n+6}{30n^{2}+21n+13}$ជាប្រភាគសម្រួលមិនបាន}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថាចំពោះ$a>1$និង$m>1$គេបាន$gcd\left(\dfrac{a^{m}-1}{a-1},a-1\right)=gcd(m,a-1)$ដែល $a,m\in{\N}$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$gcd\left(\dfrac{a^{m}-1}{a-1},a-1\right)=gcd(m,a-1)$\\
+តាង$d=gcd\left(\frac{a^m-1}{a-1},a-1\right)$\\
+តាមនិយមន័យ$\begin{cases}
+d\mid \frac{a^m-1}{a-1}\\
+d\mid a-1
+\end{cases}$\\
+$\begin{cases}
+d\mid \frac{(a-1)\left(a^{m-1}+a^{m-2}+\cdots+a+1\right)}{a-1}\\
+d\mid a-1
+\end{cases}\\
+\begin{cases}
+d\mid \left(a^{m-1}-1\right)+\left(a^{m-2}-1\right)+\cdots+a-1+m\\
+d\mid a-1
+\end{cases}\\
+\begin{cases}
+d\mid (a-1)\left(a^{m-2}+a^{m-3}+\cdots+a+1\right)+\cdots+a-1+m\\
+d\mid m
+\end{cases}\\
+\begin{cases}
+d\mid m\\
+d\mid a-1
+\end{cases}\\
+\Rightarrow gcd(m,a-1)=d$\quad(ពិត)\\
+\fbox{\so $gcd\left(\dfrac{a^{m}-1}{a-1},a-1\right)=gcd(m,a-1)$}
+\end{proof}
+\begin{exercise}
+រកចំនួនគត់ធម្មជាតិ$n$តូចបំផុតដើម្បីឱ្យប្រភាគខាងក្រោមសម្រួលមិនបាន\\$\dfrac{7}{n+9}, \dfrac{8}{n+10}, \dfrac{9}{n+11},\cdots,\dfrac{31}{n+33}$​ ។
+\end{exercise}
+\begin{proof}[\solution]
+រកចំនួនគត់ធម្មជាតិ$n$\\
+រាងទូទៅនៃប្រភាគគឺ$\frac{k}{n+k+2},k=7,8,\cdots,31$\\
+ប្រភាគ$\frac{k}{n+k+2}$ជាប្រភាគសម្រួលមិនបាន\\
+គេបាន$gcd(n+k+2,k)=1\\
+\Rightarrow gcd(n+2,k)=1$\\
+-បើ$n+2\leqslant6,k=7,8,\cdots,31$\\
+គ្មានតម្លៃ$n$ដែល$gcd(n+2,k)=1$\\
+-បើ$7\leqslant n+2\leqslant31,k=7,8,\cdots,31$\\
+មានតម្លៃ$n+2$ធំជាង$31$គឺ$37$\\
+នោះ$n+2=37\\
+\Rightarrow n=35$\\
+\fbox{\so $n=35$}
+\end{proof}
+\begin{exercise}
+រកចំនួនគត់ធម្មជាត$n$ដើម្បី​ឱ្យ$\dfrac{6n+5}{5n+6}$សម្រួលមិនបាន។
+\end{exercise}
+\begin{proof}[\solution]
+រកចំនួនគត់ធម្មជាតិ$n$\\
+រក$gcd(6n+5,5n+6)$\\
+តាង$d=gcd(6n+5,5n+6)$\\
+តាមនិយមន័យ$\begin{cases}
+d\mid 6n+5\\
+d\mid 5n+6
+\end{cases}$\\
+$\begin{cases}
+d\mid 30n+25\\
+d\mid 30n+36
+\end{cases}$\\
+$\Rightarrow d\mid (30n+36)-(30n+25)$\\
+$d\mid 11$\\
+$\Rightarrow d\mid 11\text{ឬ} d\mid 1\Leftrightarrow d=11\text{ឬ}​ d=1$\\
+ម្យ៉ាងទៀត$d\mid 6n+5-(5n+6)\\
+d\mid n-1\\
+\Rightarrow n-1\neq 11k,k\in \Z \\
+n\neq 11k+1,k=1,2,\cdots$\\
+\fbox{\so $n\neq 11k+1,k=1,2,\cdots$}
+\end{proof}
+\begin{exercise}
+រកគ្រប់ចំនួនគត់$n\in {\N}$ដើម្បីឱ្យ
+\begin{enumerate}[a]
+\begin{multicols}{3}
+\item $n^{4}+4$ជាចំនួនបឋម
+\item $n^{1997}+n^{1996}+1$ជាចំនួនបឋម
+\item $n^{4}+n^{2}+1$ជាចំនួនបឋម។
+\end{multicols}
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+រកគ្រប់ចំនួនគត់$n\in \N$ដើម្បីឱ្យ
+\begin{enumerate}[a]
+\item $n^{4}+4$ជាចំនួនបឋម\\
+$\begin{aligned}
+\text{គេបាន}\; n^4+4&=\left(n^2\right)^2+2^2\\
+&=\left(n^2\right)^2+4n^2+2^2-4n^2=\left(n^2+2\right)^2-4n^2\\
+&=\left(n^2+2-2n\right)\left(n^2+2+2n\right)=\left(n^2-2n+2\right)\left(n^2+2n+2\right)
+\end{aligned}$\\
+$n^4+4$ជាចំនួនបឋមកាលណា\\
+$n^2-2n+2=1\\
+n^2-2n+1=0\\
+(n-1)^2=0\\
+\Rightarrow n=1$\\
+\fbox{\so $n=1$}
+\item $n^{1997}+n^{1996}+1$ជាចំនួនបឋម\\
+គេបាន$n^{1997}+n^{1996}+1=n^{1997}-n^2+n^{1996}-n+n^2+n+1\\
+=n^2\left(n^{1995}-1\right)+n\left(n^{1995}-1\right)+n^2+n+1=\left(n^{1995}-1\right)(n^2+n)+n^2+n+1\\
+=\left[\left(n^3\right)^{665}-1\right](n^2+n)+n^2+n+1\\
+=\left(n^3-1\right) f(n)(n^2+n)+n^2+n+1
+\quad \text{ដែល}f(n)=\left[\left(n^3\right)^{664}+\left(n-1\right)^{663}+\cdots+1\right]\\
+=(n-1)(n^2+n+1)f(n)(n^2+n)+n^2+n+1\\
+=(n^2+n+1)\left[(n-1)f(n)(n^2+n)+1\right]$\\
+ដោយ$n^2+n+1\geq3\; \in \N\\
+\Rightarrow (n-1)f(n)(n^2+n)+1=1$\\
+ហើយ$n^2+n>0\, f(n)>0\\
+n-1=0\\
+n=1$\\
+\fbox{\so $n=1$}
+\item $n^{4}+n^{2}+1$ជាចំនួនបឋម\\
+គេបាន$n^4+n^2+1=n^4+2n^2+1-n^2\\
+=(n^2+1)^2-n^2=(n^2+1-n)(n^2+1+n)\\
+=(n^2-n+1)(n^2+n+1)\\
+\Rightarrow n^2-n+1<n^2+n+1\; \in \N$\\
+$n^4+n^2+1$ជាចំនួនបឋមកាលណា\\
+$n^2-n+1=1\\
+n(n-1)=0\\
+\Rightarrow n=1$\\
+\fbox{\so $n=1$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+រកចំនួនបឋម$p$ដែល
+\begin{enumerate}[a]
+\item $2p+1$ជាគូបនៃចំនួគត់ធម្មជាតិ
+\item $13p+1$ជាគូបនៃចំនួនគត់ធម្មជាតិ។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+រកចំនួនបឋម$p$ដែល
+\begin{enumerate}[a]
+\item $2p+1$ជាគូបនៃចំនួគត់ធម្មជាតិ\\
+$\star$របៀបទី១\\
+តាង$2p+1=k^3\; ,k\in \N\\
+2p=k^3-1\\
+2p=(k-1)(k^2+k+1)$\\
+$\bullet$ករណី$\begin{cases}
+k-1=2\\
+k^2+k+1=p
+\end{cases}
+\Rightarrow \begin{cases}
+k=3\\
+3^2+3+1=p
+\end{cases}
+\Rightarrow \begin{cases}
+k=3\\
+p=13
+\end{cases}$\\
+$\bullet \text{ករណី}\begin{cases}
+k-1=p\\
+k^2+k+1=2
+\end{cases}\Rightarrow \begin{cases}
+k=p+1\\
+k^2+k+1=2
+\end{cases}\\
+\Rightarrow (p+1)^2+p+1+1-2=0\\
+p^2+2p+1+p=0\\
+p^2+3p+1=0$គ្មានចំនួនបឋម$p$ណាដែលផ្ទៀងផ្ទាត់នោះទេ\\
+\fbox{\so $p=13$}\\
+$\star$របៀបទី២\\
+តាង$2p+1=k^3$\\
+ដោយដឹងថា$2p+1$ជាចំនួនគត់សេស\\
+$\begin{aligned}[t]
+\text{គេបាន}\;&k^3\text{ជាចំនួនគត់សេស}\\
+&k\text{ក៏ជាចំនួនគត់សេសដែរ}
+\end{aligned}$\\
+តាង$k=2t+1$គេបាន\\
+$2p+1=(2t+1)^3\\
+2p+1=8t^3+12t^2+6t+1\\
+2p=8t^3+12t^2+6t\\
+p=4t^3+6t^2+3t\\
+p=t(t^2+6t+3)$\\
+ដោយ$p$ជាចំនួន​បឋមនិង$t<4t^2+6t+3\\
+\Rightarrow t=1\\
+\Leftrightarrow p=1(4\times1^2+6\times1+3)\\
+\Rightarrow p=13$\\
+\fbox{\so $p=13$}
+\item $13p+1$ជាគូបនៃចំនួនគត់ធម្មជាតិ\\
+តាង$13p+1=t^3\quad t\in\N\\
+13p=t^3-1\\
+13p=(t-1)(t^2+t+1)$\\
+$\bullet \text{ករណី}\begin{cases}
+t-1=13\\
+t^2+t+1=p
+\end{cases}
+\Rightarrow \begin{cases}
+t=14\\
+14^2+14+1=p
+\end{cases}\Rightarrow \begin{cases}
+t=14\\
+p=211 
+\end{cases}\\
+\bullet \text{ករណី}\begin{cases}
+t-1=p\\
+t^2+t+1=13
+\end{cases}\Rightarrow \begin{cases}
+t=p+1\\
+t^2+t-12=0
+\end{cases}\\
+\Rightarrow (p+1)^2+p+1-12=0\\
+p^2+2p+1+p-11=0\\
+p^2+3p-10=0\\
+p^2-2p+5p-10=0\\
+p(p-2)+5(p-2)=0\\
+(p-2)(p+5)=0$\\
+ដោយ$(P+5)>0\\
+P-2=0\\
+P=2$\\
+\fbox{\so $p=2$និង$p=211$}
+\end{enumerate}
+\end{proof}
+\begin{exercise}
+ស្រាយបញ្ជាក់ថា$2^{2{10n+1}}+19$និង$2^{3^{4n+1}}+3^{2^{4n+1}}+5$ជាចំនួនសមាសចំពោះ$\forall n \in {\N}$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$2^{2{10n+1}}+19$និង$2^{3^{4n+1}}+3^{2^{4n+1}}+5$ជាចំនួនសមាស\\
+$\star$ស្រាយបញ្ជាក់ថា$2^{2{10n+1}}+19$ជាចំនួនសមាស\\
+ដោយ$gcd(2,5)=1\\
+2^4\equiv 1\quad(mod5)$\\
+យក$2^{10n+1}$ចែកនឹង$4$\\
+$\begin{aligned}[t]
+2^{10n+1}&=2(2^2)^{5n}=2(4)^{5n}\\
+&\equiv 0\quad(mod4)
+\end{aligned}$
+$\Rightarrow 2^{10n+1}=4k$\\
+$\begin{aligned}[t]
+\text{គេបាន}\; &2^{2^{10n+1}}+19=\left(2^4\right)^k+19=(15+1)^k+19=(15+1)^k+(20-1)\\
+&\equiv 1-1\equiv 0\quad(mod5)
+\end{aligned}$\\
+$\Rightarrow 2^{2^{10n+1}}+19\vdots 5$\\
+\fbox{\so $2^{2^{10n+1}}+19$ជាចំនួនសមាស$\forall n\in \N$}\\
+$\star$ស្រាយថា$2^{3^{4n+1}}+3^{2^{4n+1}}+5$ជាចំនួនសមាស\\
+ដោយ$\begin{aligned}[t]
+&2^{3^{4n+1}}+(2+1)^{2^{4n+1}}+(6-1)\\
+&\equiv 1-1\equiv 0\quad(mod2)
+\end{aligned}$\\
+\fbox{\so $2^{3^{4n+1}}+3^{2^{4n+1}}+5$ជាចំនួនសមាស}
+\end{proof}
+\begin{exercise}
+រកគ្រប់ចំនួនគត់វិជ្ជមាន$a$និង$b$ដើម្បីឱ្យ$a^{4}+4b^{4}$ជាចំនួនបឋម។
+\end{exercise}
+\begin{proof}[\solution]
+រកគ្រប់ចំនួនគត់វិជ្ជមាន$a$និង$b$\\
+$\begin{aligned}[t]
+\text{គេបាន}\;&a^{4}+4b^{4}=(a^2)^2+4a^2b^2+(2b^2)^2-4a^2b^2=\left(a^2+2b^2\right)^2-4a^2b^2\\
+&=\left(a^2+2b^2-2ab\right)\left(a^2+2b^2+2ab\right)
+\end{aligned}\\
+\forall n\in \N\Rightarrow a^2+2b^2-2ab<a^2+2b^2+2ab$\\
+លក្ខខណ្ឌ$a^4+4b^4$ជាចំនួនបឋមគេបាន\\
+$a^2+2b^2-2ab=1\\
+a^2-2ab+b^2+b^2=1\\
+(a-b)^2+b^2=1\\
+\forall n\in\N\\
+\Rightarrow
+\begin{cases}
+a-b=0\\
+b=1
+\end{cases}\Rightarrow \begin{cases}
+a=b=1\\
+b=1
+\end{cases}$\\
+\fbox{\so $a=b=1$}
+\end{proof}
+\begin{exercise}
+$p$ជាចំនួនបឋមធំជាង$5$ស្រាយបញ្ជាក់ថា$p^{8n}+3p^{4n}-4 \vdots 5$។
+\end{exercise}
+\begin{proof}[\solution]
+ស្រាយបញ្ជាក់ថា$p^{8n}+3p^{4n}-4 \vdots 5$\\
+$\begin{aligned}[t]
+\text{តាង}N&=p^{8n}+3p^{4n}-4=p^{8n}+4p^{4n}-p^{4n}-4\\
+&=p^{4n}\left(p^{4n}+4\right)-\left(p^{4n}+4\right)=\left(p^{4n}+4\right)\left(p^{4n}-1\right)
+\end{aligned}$\\
+ដោយ$p$ជាចំនួនបឋមធំជាង$5$\\
+តាមទ្រឹស្តីបទ{\en Fermat}\\
+$\Rightarrow gcd(p,5)=1\\
+p^4\equiv 1\quad(mod 5)\\
+p^{4n}\equiv 1\quad(mod5)\\
+p^{4n}-1\equiv 0\quad(mod5)
+$\\ដោយ$p^{4n}-1\vdots 5$\\
+នោះ$\left(p^{4n}+4\right)\left(p^{4n}-1\right)\vdots 5$\quad(ពិត)\\
+\fbox{\so $p^{8n}+3p^{4n}-4\vdots 5$}
+\end{proof}
+\begin{exercise}
+រកចំនួនបឋម$p$ដើម្បីឱ្យ$2^{p}+p^{2}$ក៏ជាចំនួនបឋមដែរ។
+\end{exercise}
+\begin{proof}[\solution]
+រកចំនួនបឋម$p$ដើម្បីឱ្យ$2^{p}+p^{2}$ក៏ជាចំនួនបឋមដែរ\\
+ឱ្យ$p=2\Rightarrow 2^2+2^2=8$មិនមែនជាចំនួនបឋម\\
+បើ$p=3\Rightarrow 2^3+3^2=8+9=17$ជាចំនួនបឋម\\
+$p=5\Rightarrow 2^5+5^2=32+25=57$មិនមែនជាចំនួនបឋម\\
+ចំពោះ$p>5$មានរាង$6k+1,6k+5$\\
+-ចំពោះ$p=6k+1$គេបាន\\
+$\begin{aligned}[t]
+2^p+p^2&=2^{6k+1}+(6k+1)^2=(3-1)^{6k+1}+(6k+1)^{2}\\
+&\equiv -1+1\equiv 0\quad(mod3)
+\end{aligned}$\\
+-ចំពោះ$p=6k+5$គេបាន\\
+$\begin{aligned}[t]
+2^p+p^2&=2^{6k+5}+(6k+5)^2=(3-1)^{6k+5}+(6k+5)^2\\
+&\equiv 1-1\equiv 0\quad(mod3)
+\end{aligned}\\
+\Rightarrow p>5\Leftrightarrow 2^p+p^2\vdots 3$នោះ$2^p+p^2$ជាចំនួនសមាស\\
+\fbox{\so $p=3, 2^p+p^2$ជាចំនួនបឋម}
+\end{proof}
+\begin{exercise}
+ រកគ្រប់ឬសគត់វិជ្ជមាន $x,y$ ដែលផ្ទៀងផ្ទាត់សមីការៈ
+\begin{enumerate}[a]
+\begin{multicols}{2}
+\item $5x+7y=112$
+\item $5x+19y=674$
+\item $38x+117y=15$
+\item $21x-17y=-3$។
+\end{multicols}
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+ រកគ្រប់ឬសគត់វិជ្ជមាន $x,y$ ដែលផ្ទៀងផ្ទាត់សមីការៈ
+ \begin{enumerate}[a]
+ \item $5x+7y=112$\\
+ យក$x_0=0,y_0=16$
+ គេបាន\\
+ $-\underline{\begin{cases}
+ 5x+7y=112\\
+ 5\times0+7\times 16=112
+ \end{cases}}\\
+ \begin{aligned}[t]
+ \Rightarrow &5x+7(y-16)=0\\
+&5x=-7(y-16)\quad(1) \end{aligned}$\\
+ដោយ$-7(y-16)\vdots7\\
+\Rightarrow 5x\vdots 7\Leftrightarrow x\vdots 7\\
+\Rightarrow x=7t\qquad ,t\in\Z$\\
+តាម$(1)$គេបាន\\
+$5\times7t=-7(y-16)\\
+5t=-y+16\\
+y=16-5t$\\
+ដោយ$x,y\in\N$\\
+$\Rightarrow \begin{cases}
+x>0\\
+y>0
+\end{cases}\Rightarrow \begin{cases}
+7t>0\\
+16-5t>0
+\end{cases}\Rightarrow \begin{cases}
+t>0\\
+t<\frac{16}{5}
+\end{cases}\\
+0<t<\frac{16}{5}\Rightarrow t\in\{1,2,3\}$\\
+នោះគូចម្លើយគឺ$(x,y)=(7t,16-5t)=(7,11),(14,6),(21,1)$\\
+\fbox{\so សមីការមានឬសគត់$(7,11),(14,6),(21,1)$}
+\item $5x+19y=674$\\
+យក$y_0=1\Rightarrow x=\frac{674-19}{5}=131$\\
+គេបាន\\
+$-\underline{\begin{cases}
+5x+19y=674\\
+5\times131+19\times1=674
+\end{cases}}\\
+\begin{aligned}[t]
+\Rightarrow& 5(x-131)+19(y-1)=0\\
+&5(x-131)=-19(y-1)\quad(1)
+\end{aligned}$\\
+ដោយ$-19(y-1)\vdots 19\\
+\Rightarrow 5(x-131)\vdots 19\\
+x-131\vdots19\\
+x-131=19t\quad,t\in\Z\\
+x=19t+131$\\
+តាម$(1)$\\
+$5(19t+131-131)=-19(y-1)\\
+5\times19t=-19(y-1)\\
+5t=-y+1\\
+y=1-5t$\\
+ដោយ$x,y\in\N\\
+\begin{cases}
+19t+131>0\\
+1-5t>0
+\end{cases}\Rightarrow
+\begin{cases}
+t>-\frac{131}{19}\\
+t<\frac{1}{5}
+\end{cases}\\
+\Rightarrow -\frac{131}{19}<t<\frac{1}{5}$\\
+ដោយ$t\in\Z\Rightarrow t\in\{-6,-5,-4,-3,-2,-1,0\}$\\
+នោះគូចម្លើយគឺ$(x,y)=(17,31),(36,26),(55,21),(74,16),(93,11),(112,6),(131,1)$\\
+\fbox{\so សមីការមានឬសគត់គឺ$(x,y)=(17,31),(36,26),(55,21),(74,16),(93,11),(112,6),(131,1)$}
+\item $38x+117y=15$\\
+ដោយ$x,y\in\N\\
+\Rightarrow 38x+117y\geqslant38+117\\
+\Rightarrow 38x+117y=15$គ្មានឬសជាចំនួ​នគត់វិជ្ជមាន\\
+\fbox{\so សមីការគ្មានឬសគត់}
+\item $21x-17y=-3$\\
+យក$x_0=12\Rightarrow y_0=\frac{-3-21\times12}{-17}=15$\\
+គេបាន\\$-\underline{\begin{cases}
+21x+117y=-3\\
+21\times12-17\times15=-3
+\end{cases}}\\
+\begin{aligned}[t]
+\Rightarrow &21(x-12)+17(y-15)=0\\
+&21(x-12)=-17(y-15)\quad(1)
+\end{aligned}$\\
+ដោយ$-17(y-15)\vdots17\\
+\Rightarrow 21(x-12)\vdots17\\
+\Rightarrow x-12\vdots17\\
+x-12=17t\quad,t\in\Z\\
+x=17t+12\\
+\text{តាម}(1)\\
+21(17t+12-12)=17(y-15)\\
+21t=y+15\\
+y=21t-15\\
+\text{ដោយ}x,y\in\N\\
+\begin{cases}
+17t+12>0\\
+21t-15>0
+\end{cases}\Rightarrow \begin{cases}
+t>-\frac{12}{17}\\
+t>\frac{15}{21}
+\end{cases}$\\
+ដោយ$t\geqslant0\quad,t\in\Z$\\
+នោះសមីការ$21x-17y=-3$មានឬសច្រើនរាប់មិនអស់\\
+\fbox{\so សមីការមានឬសច្រើនរាប់មិនអស់}
+ \end{enumerate}
+\end{proof}
+\begin{exercise}
+\begin{enumerate}[a]
+\item នៅលើបន្ទាត់​ $8x-13y+6=0$ ចូររកចំណុចគត់(ជាចំណុចមានកូអរដោនេជាចំនួនគត់)នៅចន្លោះបន្ទាត់ពីរ $x=-10$​ និង $x=5$។
+\item ស្រាយបញ្ជាក់ថាក្នុងចតុកោណកែងកំណត់ដោយបន្ទាត់ $x=6, x=42$ និង $y=2, y=17$ មិនមានចំណុចគត់ណានៅលើបន្ទាត់ $3x+5y=7$។
+\end{enumerate}
+\end{exercise}
+\begin{proof}[\solution]
+
+\end{proof}
+\newpage
+\begin{tikzpicture}[scale=0.15,line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+\draw[->,ultra thick,color=blue] (-39,0.) -- (60,0.);
+\foreach \x in {6,42}
+\draw[shift={(\x,0)},color=blue] (0pt,2pt) -- (0pt,-2pt) node[below] {\footnotesize $\x$};
+\draw[->,ultra thick,color=blue] (0.,-40) -- (0.,40);
+\foreach \y in {2,17}
+\draw[shift={(0,\y)},color=blue] (2pt,0pt) -- (-2pt,0pt) node[left] {\footnotesize $\y$};
+\draw[color=blue] (0pt,-10pt) node[right] {\footnotesize $0$};
+\clip(-39.78873239436621,-50.22573363431152) rectangle (60.211267605633815,49.7742663656885);
+\draw [line width=1.6pt,color=red] (6.,-40) -- (6.,40);
+\draw [line width=1.6pt,color=red] (42.,-40) -- (42.,40);
+\draw [line width=1.6pt,color=red,domain=-39:60] plot(\x,{(--2.-0.*\x)/1.});
+\draw [line width=1.6pt,color=red,domain=-39:60] plot(\x,{(--17.-0.*\x)/1.});
+\draw [line width=1.6pt,color=cyan,domain=-39:60] plot(\x,{(--7.-3.*\x)/5.});
+\begin{scriptsize}
+\draw[color=cyan] (-30,22) node {\begin{turn}{-30}$3x+5y=7$\end{turn}};
+\draw[color=blue] (0,41) node {$y$};
+\draw[color=blue] (0,-41) node {$y'$};
+\draw[color=blue] (-39,-1.3) node {$x'$};
+\draw[color=blue] (59,-1.9) node{$x$};
+\end{scriptsize}
+\end{tikzpicture}
+\begin{ex}{}{fermat}
+សចដនន្ថដដចវថដនវ្ថដវនថដ្វដថនវដថនចដសន្
+\end{ex}
+\end{document}
